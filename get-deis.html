@@ -1,0 +1,94 @@
+---
+layout: default
+title: Get Deis
+---
+
+<div class="blue get-deis content">
+    <div class="row">
+        <div class="span6">
+            <h1>Deploy Your Own Private PaaS</h1>
+            <p>Before you get started, read about Deis core <a href="http://docs.deis.io/en/latest/gettingstarted/concepts/">Concepts</a>. Review our <a href="http://docs.deis.io/">documentation</a> for more detailed instructions. Please note that Deis requires a Chef Server.  Don&#8217;t have one? <a href="https://preview.opscode.com/login" target="_blank">Sign up for a free Hosted Chef account</a>.</p>
+            <h4>Want help? <a href="http://opdemand.com" class="get-deis-link" target="_blank">OpDemand</a> provides installation assistance and commercial support.</h4>
+        </div>
+    </div>
+    <div class="row gd-code">
+        <div class="span9">
+            <h2 style="margin-top:0;">01. Provision a Deis Controller</h2>
+            <div class="row spacer">
+                <div class="span6">
+{% highlight bash %}
+$ git clone https://github.com/opdemand/deis.git  # clone the repo
+$ cd deis && bundle install                       # install ruby deps
+$ berks install && berks upload                   # upload cookbooks
+$ contrib/provision-ec2-controller.sh             # provision it
+$ sudo pip install deis                           # install the CLI
+$ deis register http://my.controller              # register a user
+{% endhighlight %}
+                </div>
+                <div class="span3">
+                    <p>Provision a private <a href="http://docs.deis.io/en/latest/components/controller/">Controller</a> &#8212; the brains of a Deis application platform.</p>
+                    <p>Use the Deis <a href="http://docs.deis.io/en/latest/gettingstarted/usage/">command-line client</a> to interact with the controller.</p>
+                </div>
+            </div>
+            <h2>02. Create &#038; Scale a Formation</h2>
+            <div class="row">
+                <div class="span6">
+{% highlight bash %}
+$ deis formations:create dev --flavor=ec2-us-west-2
+Creating formation... done, created dev
+Creating runtime layer... done in 1s
+Use `deis nodes:scale dev runtime=1` to scale a basic formation
+
+$ deis nodes:scale dev runtime=2
+Scaling nodes... but first, coffee!
+...done in 251s
+{% endhighlight %}
+                </div>
+                <div class="span3">
+                    <p>Create <a href="http://docs.deis.io/en/latest/gettingstarted/concepts/#formations">Formations</a> of nodes, containers and proxies used to service applications.</p>
+                    <p>Scale nodes automatically to add or remove capacity to a formation.</p>
+                    <p>Add nodes to a formation manually where automated provisioning is not possible.</p>
+                </div>
+            </div>
+            <h2>03. Deploy &#038; Scale an Application</h2>
+            <div class="row">
+                <div class="span6">
+{% highlight bash %}
+$ deis create
+Creating application... done, created peachy-waxworks
+Git remote deis added
+
+$ git push deis master
+Counting objects: 146, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (122/122), done.
+Writing objects: 100% (146/146), 21.54 KiB, done.
+Total 146 (delta 84), reused 47 (delta 22)
+Node.js app detected
+-----> Resolving engine versions
+Using Node.js version: 0.10.15
+Using npm version: 1.2.30
+...
+-----> Compiled slug size: 4.7 MB
+Launching... done, v2
+
+-----> peachy-waxworks deployed to Deis
+http://peachy-waxworks.deisapp.com ...
+
+$ curl -s http://peachy-waxworks.deisapp.com
+Powered by Deis!
+
+$ deis scale web=4
+Scaling containers... but first, coffee!
+done in 12s
+{% endhighlight %}
+                </div>
+                <div class="span3">
+                    <p>Use the Deis client to create a new <a href="http://docs.deis.io/en/latest/gettingstarted/concepts/#applications">Application</a> on a given formation.</p>
+                    <p>Use `git push deis master` to deploy the app and balance it across the formation.</p>
+                    <p>Push code, change config, scale containers, view logs, run one-off commands &mdash; regardless of the formation’s underlying infrastructure.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+---
+layout: default
+title: Deis Blog
+---
+
+{% for post in site.posts %}
+    <div class="blue blog">
+        <a href="{{ post.url }}"><h1>{{ post.title }}</h1></a>
+        <p>{{ post.excerpt }}</p>
+    </div>
+    <div class="row blog-social">
+        <div class="span6">
+            <a href="#" 
+            onclick="
+            window.open(
+            'https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ post.url }}', 
+            'facebook-share-dialog', 
+            'width=626,height=436'); 
+            return false;">
+            <span class="blog facebook"></span></a>
+            <a href="https://twitter.com/intent/tweet?text={{ post.title }}%20{{ site.url }}{{ post.url }}%20%23deis&via=opendeis&lang=en" target="_blank"><span class="blog twitter"></span></a>
+            <a href="https://plus.google.com/share?url={{ site.url }}{{ post.url }}" target="_blank"><span class="blog google-plus"></span></a>
+            <span class="time"><p>{{ post.date | date_to_string }}</p></span><span class="blog-tags"></span>
+        </div>
+    </div>
+{% endfor %}

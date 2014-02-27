@@ -1,0 +1,14 @@
+Humans Held Responsible
+=======================
+
+# TEAM
+
+    Ben Grunfeld -- Wordpress Theme Author
+    Matthew Fisher -- Ported theme to Jekyll
+
+# THANKS
+
+    Gabriel Monroy
+    Joshua Schnell
+    Matt Boersma
+    Mari Grunfeld

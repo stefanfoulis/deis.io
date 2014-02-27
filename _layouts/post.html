@@ -1,0 +1,46 @@
+---
+layout: default
+---
+
+{% assign author = site.authors[page.author] %}
+
+<div class="blue blog">
+    <a href="{{ post.url }}"><h1>{{ page.title }}</h1></a>
+    {{ content }}
+</div>
+<div class="row blog-social">
+    <div class="span6">
+        <a href="#" 
+        onclick="
+        window.open(
+        'https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ post.url }}', 
+        'facebook-share-dialog', 
+        'width=626,height=436'); 
+        return false;">
+        <span class="blog facebook"></span></a>
+        <a href="https://twitter.com/intent/tweet?text={{ post.title }}%20{{ site.url }}{{ post.url }}%20%23deis&via=opendeis&lang=en" target="_blank"><span class="blog twitter"></span></a>
+        <a href="https://plus.google.com/share?url={{ site.url }}{{ post.url }}" target="_blank"><span class="blog google-plus"></span></a>
+        <span class="time"><p>{{ page.date | date_to_string }}</p></span><span class="blog-tags"></span>
+    </div>
+</div>
+
+{% if page.comments %}
+    <!-- TODO: add Disqus comments here -->
+{% endif %}
+
+<div class="spacer2 bio">
+    <div class="bio-pic">
+        <img alt="{{ author.display_name }}" src="http://www.gravatar.com/avatar/{{ author.gravatar }}" class="avatar avatar-96 photo" height="96" width="96">
+    </div>
+    <div class="bio-info">
+        <p class="bio-name">{{ author.display_name }}</p>
+        <p class="description">{{ author.short_bio }}</p>
+        <p class="bio-twitter">Follow me on Twitter <a target="_blank" href="https://twitter.com/{{ author.twitter }}">@{{ author.twitter }}</a></p>
+    </div>
+    <div class="bio-links">
+        <a href="/get-involved#mailingList">Join the Deis mailing list</a>
+        <a target="_blank" href="https://twitter.com/opendeis">Follow @opendeis on Twitter</a>
+        <a href="/blog.html">Blog home</a>
+        <a href="http://docs.deis.io">Deis documentation</a>
+    </div>
+</div>

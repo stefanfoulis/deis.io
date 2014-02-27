@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ page.title }} | {{ site.tagline }}</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Deis, open source, application platform, chef, docker, buildpacks, private paas, paas" />
+    <!-- Twitter Bootstrap -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap-responsive.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <!-- syntax highlighting CSS -->
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="/assets/img/favicon.ico" />
+    <link rel='next' title='Overview' href='http://deis.io/overview/' />
+    <script src="http://deis.io/wp-content/themes/deis/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    <script type='text/javascript' src='http://deis.io/wp-includes/js/jquery/jquery.js?ver=1.10.2'></script>
+    <script type='text/javascript' src='http://deis.io/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
+    <script type='text/javascript' src='http://deis.io/wp-includes/js/jquery/jquery.form.min.js?ver=3.37.0'></script>
+    <script type='text/javascript' src='http://deis.io/wp-includes/js/jquery/ui/jquery.ui.core.min.js?ver=1.10.3'></script>
+</head>
+<body>
+
+    <!--[if lt IE 7]>
+    <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+
+    <a class="fork main-fork" href="http://github.com/opdemand/deis"><div class="forkImage"></div></a>
+    <div class="container">
+        <div class="row">
+            <div class="span3 hoop col1">
+                <div class="nav-border">
+                    <ul class="nav nav-list menu">
+                        <li><a href="/"><img class="logo" src="/assets/img/menu-logo.png" alt="deis logo"></a></li>  
+                        <li class="divider"></li>
+                        <li class="navitem overview{% if page.title == "Deis Overview" %} selected green{% endif %}"><a href="/overview.html">Overview</a></li>
+                        <li class="divider"></li>
+                        <li class="navitem get-deis{% if page.title == "Get Deis" %} selected blue{% endif %}"><a href="/get-deis.html">Get Deis</a></li>
+                        <li class="divider"></li>
+                        <li class="navitem get-involved{% if page.title == "Get Involved with Deis" %} selected pink{% endif %}"><a href="/get-involved.html">Get Involved</a></li>
+                        <li class="divider"></li>
+                        <li class="navitem documentation"><a href="http://docs.deis.io/">Documentation</a></li>
+                        <li class="divider"></li>
+                        <li class="navitem blog{% if page.title == "Deis Blog" %} selected blue{% endif %}"><a href="/blog.html">Blog</a></li>
+                        <li class="divider"></li>
+                        <div style="clear:both;"></div>
+                    </ul>
+
+                    <div>
+                        <div class="social-menu ">
+                            <a href="https://twitter.com/opendeis" target="_blank"><span class="twitter"></span></a>
+                            <a href="http://freenode.net" target="_blank"><span class="irc"></span></a>
+                            <a href="https://github.com/opdemand/deis" target="_blank"><span class="github"></span></a>
+                            <a href="http://stackoverflow.com/" target="_blank"><span class="stack"></span></a>
+                        </div>
+
+                        <div class="byline-menu">
+                            <span class="cloud-logo"></span>
+                            <p>Deis is a project by<br><a href="http://opdemand.com" target="_blank">OpDemand</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span9 hoop content">
+                {{ content }}
+            </div>
+        </div> <!-- .row -->
+    </div> <!-- .main_section container-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/main.js"></script>
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-42867143-1', 'deis.io');
+    ga('send', 'pageview');
+    </script>
+</body>
+</html>

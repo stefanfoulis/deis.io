@@ -1,0 +1,22 @@
+name: Deis
+url: http://deis.io
+tagline: Your Paas. Your Rules.
+pygments: true
+timezone: America/Denver
+permalink: /:year/:month/:day/:title
+authors:
+  mattb:
+    display_name: Matt Boersma
+    gravatar: 599d83c3405e24cae65a1b1ad5401cb2
+    short_bio: Senior Software Engineer at OpDemand
+    twitter: RealMattBoersma
+  mattf:
+    display_name: Matt Fisher
+    gravatar: 65e1d16c6d56dd57fa47b30dcb429eed
+    short_bio: Senior Software Engineer at OpDemand
+    twitter: bacongobbler
+  gabrielm:
+    display_name: Gabriel Monroy
+    gravatar: 1f5dd69ca86e92ce3bc039c63f511d40
+    short_bio: Cloud operations nerd and CTO at OpDemand
+    twitter: gabrtv
