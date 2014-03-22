@@ -3,7 +3,7 @@ layout: post
 title:  Reverse Proxy Showdown
 date:   2014-03-17
 author: mattf
-tags:   proxy nginx lighttpd pound varnish strowger comparison
+tags:   proxy nginx lighttpd pound hipache strowger comparison
 comments: true
 ---
 
@@ -28,7 +28,7 @@ ours). Here's the list of the proxies we looked at:
 - Nginx: a high performance, open source web application accelerator
 - Lighttpd: a secure, fast, compliant, and flexible web-server for high-performance environments
 - Pound: a reverse proxy, load balancer and HTTPS front-end for Web server(s)
-- Varnish: a web application accelerator. Also known as a caching HTTP reverse proxy
+- Hipache: a distributed HTTP and websocket proxy developed by Dotcloud.
 - Strowger: [flynn.io](https://flynn.io/)'s HTTP/TCP cluster router
 - HAProxy: a fast and reliable solution offering high availability, load balancing, and proxying
 
