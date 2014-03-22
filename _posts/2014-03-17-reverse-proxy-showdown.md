@@ -18,8 +18,8 @@ proxy, so I had to come up with a solution that would meet Deis' demands. This p
 explains our research on different proxies and why we decided on choosing nginx as our
 default router.
 
-One thing that we overlooked when containerizing all the things was the requirement for a
-reverse proxy. After the release, we decided to start doing some research on the different
+We accidentally left out one component when containerizing all the things: a reverse
+proxy. After the release, we decided to start doing some research on the different
 proxies and to come up with a solution for our use case. Of all the proxies available, we
 decided to look at 6 different proxies. After some filtering, we set our eyes on 1
 proxy, containerized it, and then ran some more tests against it for your enjoyment (and
