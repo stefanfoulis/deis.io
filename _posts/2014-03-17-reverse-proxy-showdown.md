@@ -49,16 +49,16 @@ these proxies:
   * Documentation
 
 With that, I came up with the following comparison table. From this data, we decided to
-look at three different solutions a little closer: Strowger, HAProxy, and Nginx.
+look at four different solutions a little closer: Strowger, HAProxy, Hipache, and Nginx.
 
-              | Nginx        | Lighttpd     | Pound | Varnish      | Strowger | HAProxy
-:------------ | :----------: | :----------: | :---: | :----------: | :------: | :------:
-Zero Downtime | :+1:         | :+1:         | :+1:  | :+1:         | :+1:     | :+1:
-SSL Support   | :+1:         | :+1:         | :+1:  | :-1:         | :+1:     | :-1:
-TCP Support   | :+1:         | :-1:         | :-1:  | :-1:         | :-1:     | :+1:
-Prod-ready?   | :+1:         | :+1:         | :+1:  | :+1:         | :-1:     | :+1:
-License       | 2-clause BSD | 2-clause BSD | GPL   | 2-clause BSD | MIT      | GPLv2
-Language      | C            | C            | C     | C            | Golang   | C
+              | Nginx        | Lighttpd     | Pound | Hipache | Strowger | HAProxy
+:------------ | :----------: | :----------: | :---: | :-----: | :------: | :-----:
+Zero Downtime | :+1:         | :+1:         | :+1:  | :+1:    | :+1:     | :+1:
+SSL Support   | :+1:         | :+1:         | :+1:  | :+1:    | :+1:     | :-1:
+TCP Support   | :+1:         | :-1:         | :-1:  | :-1:    | :-1:     | :+1:
+Prod-ready?   | :+1:         | :+1:         | :+1:  | :+1:    | :-1:     | :+1:
+License       | 2-clause BSD | 2-clause BSD | GPL   | MIT     | MIT      | GPLv2
+Language      | C            | C            | C     | Node.js | Golang   | C
 
 ## Strowger
 
@@ -83,6 +83,17 @@ persistence or Layer7 processing. It has never crashed in a production environme
 Its documentation is also not that bad, but nowhere near as stupendous as nginx's docs.
 Did we mention that it's also never crashed in production? However, its lack of SSL
 support and dynamic configuration puts a shoehorn in this solution.
+
+## Hipache
+
+Hipache is Docker Inc's (formerly known as Dotcloud) distributed HTTP and websocket proxy.
+It is designed to route high volumes of http and websocket traffic to unusually large
+numbers of virtual hosts, in a highly dynamic topology where backends are added and
+removed several times per second. It is particularly well-suited for PaaS
+(platform-as-a-service) and other environments that are both business-critical and
+multi-tenant. Hipache is developed in Node.js and is based on the node-http-proxy library;
+a library that we know and are comfortable with. Regardless, Hipache lacks TCP support,
+which is a non-starter for us.
 
 ## Nginx
 
