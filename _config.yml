@@ -2,6 +2,19 @@ name: Deis
 url: http://deis.io
 tagline: Your Paas. Your Rules.
 pygments: true
+gems:
+  - jemoji
+markdown: redcarpet
+redcarpet:
+  extensions: [ "no_intra_emphasis",
+                "fenced_code_blocks",
+                "autolink",
+                "tables",
+                "with_toc_data",
+                "strikethrough",
+                "space_after_headers",
+                "superscript"
+              ]
 timezone: America/Denver
 permalink: /:year/:month/:day/:title
 authors:
