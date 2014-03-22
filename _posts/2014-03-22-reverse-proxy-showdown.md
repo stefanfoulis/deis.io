@@ -123,9 +123,9 @@ Let's break down the component:
 
 ### Dockerfile
 
-The Dockerfile does one thing and one thing only: build nginx with Lua support and a
-redis connection library for Lua. To do that, we compile nginx from source with Lua
-already installed into the image.
+The Dockerfile does one thing and one thing only: build nginx with TCP, Lua, and Redis
+support. To do that, we compile nginx from source with Lua already installed into the
+image, patch TCP proxy support, and add a lua library to connect to Redis.
 
 ### Confd
 
