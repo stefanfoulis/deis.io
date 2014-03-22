@@ -110,7 +110,7 @@ One interesting point about Nginx is that it does not rely on threads to handle 
 (I'm looking at you, Apache). Inbound requests are handled through an event-driven
 architecture, allowing it to scale and solve the [C10K problem][c10k]. This architecture
 is ridiculously scalable due to the low memory footprint and event-driven triggers to
-handle anything from a small blog post (like this one!)to CloudFlare's gargantuan
+handle anything from a small blog post (like this one!) to CloudFlare's gargantuan
 Content Delivery Network.
 
 ## Proof of Concept
