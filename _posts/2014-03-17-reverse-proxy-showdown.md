@@ -187,8 +187,9 @@ what we can do with this new component.
 ## Conclusion
 
 After comparing the three, we came down to only Nginx as a solution for our needs. While
-HAProxy is stable, it does not have SSL support, which is a non-starter. Strowger is not
-yet ready for production, and we need a product that works now. Nginx wins by default!
+HAProxy and Hipache are stable, it does not have SSL support, which is a non-starter.
+Strowger is not yet ready for production, and we need a product that works now. Nginx wins
+by default!
 
 [c10k]: http://www.kegel.com/c10k.html
 [dyn-config-redis]: http://sosedoff.com/2012/06/11/dynamic-nginx-upstreams-with-lua-and-redis.html
