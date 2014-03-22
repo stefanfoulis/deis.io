@@ -87,7 +87,7 @@ support and dynamic configuration puts a shoehorn in this solution.
 ## Nginx
 
 Nginx is a free, open-source, high-performance HTTP server and reverse proxy, as well as
-an IMAP/POP3 proxy server. It is known for its high performance, stability, rich feature
+an IMAP/POP3 proxy server. It is known for high performance, stability, rich feature
 set, simple configuration, and low resource consumption. Nginx also powers several
 high-visibility sites, such as Netflix, Hulu, Pinterest, CloudFlare, GitHub, Heroku,
 RightScale, Engine Yard and MaxCDN, to name a few. It has proxy support for SSL, TCP,
