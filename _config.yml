@@ -17,6 +17,8 @@ redcarpet:
               ]
 timezone: America/Denver
 permalink: /:year/:month/:day/:title
+paginate: 5
+paginate_path: "blog/page:num"
 excerpt_separator: "\n"
 exclude: ['README.md', 'Gemfile', 'Gemfile.lock', '.ruby-version']
 authors:

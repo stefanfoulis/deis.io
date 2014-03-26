@@ -3,19 +3,19 @@ layout: default
 title: Deis Blog
 ---
 
-{% for post in site.posts %}
+{% for post in paginator.posts %}
     <div class="blue blog">
         <a href="{{ post.url }}"><h1>{{ post.title }}</h1></a>
         <p>{{ post.excerpt }}</p>
     </div>
     <div class="row blog-social">
         <div class="span6">
-            <a href="#" 
+            <a href="#"
             onclick="
             window.open(
-            'https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ post.url }}', 
-            'facebook-share-dialog', 
-            'width=626,height=436'); 
+            'https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ post.url }}',
+            'facebook-share-dialog',
+            'width=626,height=436');
             return false;">
             <span class="blog facebook"></span></a>
             <a href="https://twitter.com/intent/tweet?text={{ post.title }}%20{{ site.url }}{{ post.url }}%20%23deis&via=opendeis&lang=en" target="_blank"><span class="blog twitter"></span></a>
@@ -24,3 +24,18 @@ title: Deis Blog
         </div>
     </div>
 {% endfor %}
+
+<!-- Pagination links -->
+<div class="pagination">
+  {% if paginator.previous_page %}
+    <a href="/blog/page{{ paginator.previous_page }}" class="previous">Previous</a>
+  {% else %}
+    <span class="previous">Previous</span>
+  {% endif %}
+  <span class="page_number ">Page: {{ paginator.page }} of {{ paginator.total_pages }}</span>
+  {% if paginator.next_page %}
+    <a href="/blog/page{{ paginator.next_page }}" class="next">Next</a>
+  {% else %}
+    <span class="next ">Next</span>
+  {% endif %}
+</div>
