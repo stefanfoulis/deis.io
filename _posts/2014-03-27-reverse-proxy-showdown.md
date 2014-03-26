@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Reverse Proxy Showdown
-date:   2014-03-22
+date:   2014-03-27
 author: mattf
 tags:   proxy nginx lighttpd pound hipache strowger comparison
 comments: true
