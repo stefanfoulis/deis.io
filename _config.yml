@@ -17,7 +17,7 @@ redcarpet:
               ]
 timezone: America/Denver
 permalink: /:year/:month/:day/:title
-exclude: ['README.md', 'Gemfile', 'Gemfile.lock']
+exclude: ['README.md', 'Gemfile', 'Gemfile.lock', '.ruby-version']
 authors:
   mattb:
     display_name: Matt Boersma
