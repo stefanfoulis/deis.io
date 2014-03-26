@@ -17,6 +17,7 @@ redcarpet:
               ]
 timezone: America/Denver
 permalink: /:year/:month/:day/:title
+excerpt_separator: "\n"
 exclude: ['README.md', 'Gemfile', 'Gemfile.lock', '.ruby-version']
 authors:
   mattb:
