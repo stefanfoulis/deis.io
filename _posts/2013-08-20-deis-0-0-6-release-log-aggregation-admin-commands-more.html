@@ -1,0 +1,83 @@
+---
+layout: post
+title: Deis 0.0.6 - Log Aggregation, Admin Commands & More
+categories: []
+tags:
+- Docs
+- Release
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '6'
+  _aioseop_description: We are proud to announce our 0.0.6 release which includes
+    some important new features such as log aggregation and one-off admin commands
+    and lots of bug fixes.
+  _aioseop_title: Deis 0.0.6 Release - Log Aggregation, Admin Commands & More
+author: gabrtv
+---
+<p>The Deis project is proud to announce our 0.0.6 release which includes some important new features such as log aggregation and one-off admin commands and lots of bug fixes.</p>
+<h2>What is Deis?</h2>
+<p>Deis is a Django/Celery API server, Python CLI and set of <a href="https://github.com/opdemand/deis-cookbook">Chef cookbooks</a> that combine to provide a Heroku-inspired application platform for public and private clouds. Your PaaS. Your Rules.</p>
+<h2>0.0.6 Summary</h2>
+<h4>New Features</h4>
+<ul>
+<li><code>deis logs</code>: automatic aggregation of Docker container logs using rsyslog</li>
+<li><code>deis run &lt;command&gt;</code>: run one-off commands inside ephemeral Docker containers</li>
+<li><code>deis open</code>: open your application in your default browser</li>
+<li>Documentation search now available at <a href="http://docs.deis.io/">http://docs.deis.io/</a></li>
+</ul>
+<h4>Bug Fixes</h4>
+<ul>
+<li>Fixed environment issue with controller provisioning script</li>
+<li>Fixed accidental converge and orphaned DB record after scaling down a layer</li>
+<li>Fixed bug where multiple user accounts broke formation management</li>
+<li>Fixed bug with cookie handling during registration and login</li>
+<li>Fixed stack trace on missing provider credentials</li>
+<li>Fixed 500 errors on missing log data</li>
+<li>Fixed buildpack breakage due to Docker DNS issue</li>
+</ul>
+<h4>Other Changes</h4>
+<ul>
+<li>500 errors now log full stack traces to <code>/var/log/deis/server.log</code> for easy reporting</li>
+<li>Deis controller recipes unified into single recipe[deis::controller]</li>
+<li>Updated to latest Django (1.5.2), Django REST Framework, South and Boto libraries</li>
+<li>Django admin interface enabled for easy database model access</li>
+<li>New text-based progress indicator on command line client</li>
+<li>Improved developer setup documentation</li>
+</ul>
+<h2>Community Shout Outs</h2>
+<p>We'd like to thank the following users for reporting issues via GitHub:</p>
+<ul>
+<li>@zbyte64 - <a href="https://github.com/opdemand/deis/issues/86">Python buildpack breaks when fetching python runtime</a></li>
+<li>@jwmarshall - <a href="https://github.com/opdemand/deis/issues/104">ec2 provision script should use /bin/bash instead of /bin/sh</a></li>
+<li>@aaronlifton <a href="https://github.com/opdemand/deis/issues/77">problem with initial deploy</a></li>
+<li>@ianthedeveloper, @zodman, @BrianHicks - <a href="https://github.com/opdemand/deis/issues/73">Implement Digital Ocean provider and flavors</a></li>
+</ul>
+<h2>What's Next?</h2>
+<h3>Backwards Incompatible Changes</h3>
+<p>There are a few backwards incompatible changes we need to get behind us. Firstly, we need to allow <a href="https://github.com/opdemand/deis/issues/120">multiple applications to be hosted on a single formation</a> with a single set of proxy and runtime nodes. This will allow Deis to meet the needs of software teams looking to host multiple dev/test applications using Docker. Secondly, we need to support <a href="https://github.com/opdemand/deis/issues/52">layers that serve as both proxy and runtime</a> to minimize node usage for small deployments and ultimately allow for cross-provider formations.</p>
+<h3>Rackspace &amp; Digital Ocean Providers</h3>
+<p>We've had many <a href="https://github.com/opdemand/deis/issues/73">requests for a Digital Ocean provider</a>. We also need to build an OpenStack-based provider for Deis. That means Rackspace and Digital Ocean will be our next supported providers. We will be using a TDD approach to help formalize the process for implementing a new provider.</p>
+<h3>Acceptance Test Automation</h3>
+<p>Deis has many moving parts. In order to ensure quality from release to release we are building an end-to-end test framework based on <a href="https://pypi.python.org/pypi/pexpect/">pexpect</a>. The test auomation will include creating formations, scaling layers, deploying applications, scaling containers and more. The automation test will be available in the repository for anyone to run.</p>
+<h3>Enhanced Docker Integration</h3>
+<p>Deis currently uses Docker as a LXC wrapper for running Buildpack slugs that are bind-mounted into <a href="https://github.com/opdemand/buildstep">Buildstep</a> images. As soon as the Docker Private Registry code stabilizes, we will be adding a new <code>git push</code> build process that creates and distributes images via <code>Dockerfile</code> and a private registry hosted on the controller. We will also allow builds to reference any existing Docker image by a fully qualified image URI.</p>
+<h3>SSL Support</h3>
+<p>Both the controller and formation proxies require SSL configuration. Right now controller sessions are just HTTP with cookies and passwords sent in the clear! Before we tackle formation SSL, we need the backwards incompatible changes to applications and proxies to land in master.</p>
+<h3>General Security Improvements</h3>
+<p>We've glossed over some pretty important security features in an effort to get Deis into developers hands sooner rather than later. For example, we need to implement iptables host-level firewalls, improve security group default rules, use Chef recipes to harden systems, etc. If you find any other security holes, please open a GitHub issue and tag it "Security".</p>
+<h2>Future</h2>
+<h3>Team Support</h3>
+<p>As of now, only a single user can control or push to a <a href="http://docs.deis.io/en/latest/terms/formation/">formation</a>. We need to add simple sharing features, which we can then expand upon using finer-grained access controls.</p>
+<h3>Health Checks</h3>
+<p>We do not currently monitor nodes or container health -- though we have infrastructure in place to do it.</p>
+<h3>Service Discovery</h3>
+<p>We need to make it as easy for ops folks to publish a set of reusable backing services (databases, queues, storage, etc) and allow developers to attach those services to applications. This will be done in a loosely coupled way, following Twelve Factor best practices.</p>
+<h2>How can you help?</h2>
+<ul>
+<li>Star our <a href="https://github.com/opdemand/deis">GitHub repository</a></li>
+<li>Help spread the word about <a href="http://twitter.com/opendeis">@opendeis</a> on Twitter</li>
+<li>Explore contributing to the Deis project by joining the #deis channel on Freenode</li>
+</ul>
+<p>You can learn about other ways to <a href="http://deis.io/get-involved/">get involved</a> on our website.</p>

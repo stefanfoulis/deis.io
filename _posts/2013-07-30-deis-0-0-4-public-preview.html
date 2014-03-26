@@ -1,0 +1,60 @@
+---
+layout: post
+title: Deis 0.0.4 - Public Preview
+categories: []
+tags:
+- Docs
+- Release
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '4'
+  _aioseop_keywords: Deis, Django, Celery, API, Python, Chef, Chef cookbooks, private
+    paas, buildpack, buildpacks, git push, EC2, AMI, documentation, docs, tutorial,
+    logs, log aggregation, docker, IRC, freenode, opendeis
+  _aioseop_description: Deis is a Django/Celery API server, Python CLI and set of
+    Chef cookbooks that combine to provide an open source application platform for
+    public and private clouds.
+  _aioseop_title: Deis 0.0.4 - Public Preview
+author: gabrtv
+---
+<p>Although Deis has not publicly launched yet, we're excited to release our first public preview.</p>
+<h2>What is Deis?</h2>
+<p>Deis is a Django/Celery API server, Python CLI and set of <a href="https://github.com/opdemand/deis-cookbook">Chef cookbooks</a> that combine to provide a Heroku-inspired application platform for public and private clouds. Your PaaS. Your Rules.</p>
+<h2>0.0.4 Summary</h2>
+<ul>
+<li>Buildstep integration on controller and runtime nodes, including Buildpack caching</li>
+<li>Git push workflow cleanup, including creating an initial web container on first push</li>
+<li>Pre-built EC2 AMIs to reduce average node boot times to 3-4 minutes</li>
+<li>New Layers feature, for custom node types with a specific Chef run list and config</li>
+<li>Default providers and flavors, meaning less setup time for newly registered users</li>
+<li>CI &amp; Build automation including Travis integration, Coveralls code coverage and flake8</li>
+<li>Docstrings cleanup in prep for API docs rollout</li>
+<li>Massive CLI cleanup and refactoring</li>
+</ul>
+<h2>What's Next?</h2>
+<h3>Better Documentation</h3>
+<p>We have several major pieces of documentation left to write, and the API docs need some love. And proper CLI docs, and the Tutorial. Lots of docs!</p>
+<h3>Log Aggregation</h3>
+<p>Deis will not be ready for production use until we have a log aggregation solution that provides end-users with a <code>deis logs</code> command. This is critical for troubleshooting app deployment issues. We also need a way to drain logs into tools like Splunk, Logstash, Graylog2, etc.</p>
+<h3>Admin Commands</h3>
+<p>Most frameworks require running one-off admin commands to setup databases, inspect settings and offer visibility into the Docker-based runtime environment. We will build a solution that offers a <code>deis run bash</code> capability.</p>
+<h3>SSL Support</h3>
+<p>Both the controller and formation proxies require SSL configuration. Right now it's just HTTP with cookies and passwords sent in the clear!</p>
+<h3>Team Support</h3>
+<p>As of now, only a single user can control or push to a formation. We need to add simple sharing features, which we can then expand upon using finer-grained access controls.</p>
+<h3>General Security Improvements</h3>
+<p>We've glossed over some pretty important security features in an effort to get Deis into developers hands sooner rather than later. For example, we need to implement iptables host-level firewalls, improve security group default rules, use Chef recipes to harden systems, etc. If you find any other security holes, please open a GitHub issue and tag it "Security".</p>
+<h3>Monitoring</h3>
+<p>We do not currently monitor nodes or container health -- though we have infrastructure in place to do it.</p>
+<h3>Cross-provider Formations</h3>
+<p>We are very close to offering cross-provider formations, where a single app deployment can span multiple zones, regions or even providers -- while being driven by a single <code>git push</code> or <code>deis</code> command.</p>
+<h2>How can you help?</h2>
+<p>Deis is still in its early stages. We hope to have documentation that makes for a usable public release in 0.0.5. In the meantime, you can help by:</p>
+<ul>
+<li>Joining the #deis IRC channel on Freenode and let us know what you think</li>
+<li>Creating GitHub issues (and star the project while you're at it!)</li>
+<li>Helping spread the word on Twitter (@opendeis), IRC, Google+, etc.</li>
+</ul>
+<p>Once 0.0.5 is officially out the door on August 6, we will have a much more detailed explanation of how to get involved, contribute code and help Deis succeed.</p>

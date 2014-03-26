@@ -1,0 +1,102 @@
+---
+layout: post
+title: Deis 0.5.1 - Docker Containers All the Way Down
+categories: []
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '5'
+  _wp_old_slug: deis-0-5-1-containers-all-the-way-down
+author: mboersma
+---
+<p>We are proud to announce our v0.5.1 release. Deis itself is now a set of cooperating Docker containers and Deis can build and deploy Dockerfile-based projects as well as Heroku-style apps.</p>
+<h2>What is Deis?</h2>
+<p>Deis is a Django/Celery API server, Python CLI and set of <a href="https://github.com/opdemand/deis-cookbook">Chef cookbooks</a> that combine to provide a Heroku-inspired application platform for public and private clouds. Your PaaS. Your Rules.</p>
+<h2>0.5.1 Summary</h2>
+<h3>New Features</h3>
+<ul>
+<li>
+<p><strong>Containerization of Deis Components.</strong> Deis' moving parts are now a set of trusted <a href="https://index.docker.io/search?q=deis">docker images</a>. This will result in a more modular system that is easier to deploy and to manage.</p>
+</li>
+<li>
+<p><strong>Enhanced Docker Integration.</strong> <code>git push deis master</code> and <code>deis config</code> create and distribute images internally via <a href="http://docs.docker.io/en/latest/reference/builder/">Dockerfiles</a> and a private Docker <a href="https://github.com/deis/registry">registry</a>.</p>
+</li>
+<li>
+<p><strong>Dockerfile Apps.</strong> In addition to Deis' broad support for Heroku-style apps, deis/builder can now build any application based on a <code>Dockerfile</code>.</p>
+</li>
+<li>
+<p><strong>Binary CLI.</strong> While developers may prefer to run the Deis client from <a href="https://pypi.python.org/pypi/deis/">pypi</a> or a local repository, the <code>make client_binary</code> command will build an executable version with no additional requirements. Executables for some platforms are available for download:</p>
+<ul>
+<li>https://s3-us-west-2.amazonaws.com/opdemand/deis-osx-0.5.1.tgz</li>
+<li>https://s3-us-west-2.amazonaws.com/opdemand/deis-win32-0.5.1.zip</li>
+<li>https://s3-us-west-2.amazonaws.com/opdemand/deis-win64-0.5.1.zip</li>
+<li>https://s3-us-west-2.amazonaws.com/opdemand/deis-deb-wheezy-0.5.1.tgz</li>
+</ul>
+</li>
+</ul>
+<h3>Under the Hood</h3>
+<ul>
+<li>Updated to Docker 0.8.0</li>
+<li>Updated Chef to 11.8.2</li>
+<li>Docker waits until after the "vagrant-mounted" event to start on Vagrant</li>
+</ul>
+<h3>Bug Fixes</h3>
+<ul>
+<li>Pinned macaddr and etcd gem requirements to fix provision issues</li>
+<li>Fixed layers:update sending default args</li>
+<li>Added a missing DigitalOcean cloud region and the new Singapore region</li>
+</ul>
+<h3>Community Shout-Outs</h3>
+<p>We are proud to <a href="http://deis.io/new-maintainer-matthew-fisher/">welcome @bacongobbler</a> as a new maintainer. Formerly one of our most productive external contributors, Matthew is now working on Deis full time!</p>
+<p>We want to thank the following Deis community members for creating GitHub issues, providing support to others, and working on various Deis branches:</p>
+<ul>
+<li>@tombh - beat our Vagrant support into shape, generous and constant testing, pull requests, and support as always. Thanks Tom!</li>
+<li>@lcheng61 - found AMI access bug, tested fix</li>
+<li>@jwilder - found old AMI access bug and workaround</li>
+<li>@davidcollom - testing, bug finding, Rackspace doc fixes</li>
+<li>@fagiani - testing, bug finding and patches</li>
+<li>@paulczar - testing, bug finding, several fixes</li>
+<li>@mo-mughrabi - found eventmachine requirements bug and fixed</li>
+<li>@nathansamson - containerize testing and bug finding</li>
+<li>@azurewraith - testing, bug finding and suggested improvements</li>
+<li>@guilhem - major cleanup of chef code and testing</li>
+<li>@jsuchal - testing on DigitalOcean</li>
+<li>@fan0o - testing, upstart bug catch</li>
+<li>@ksikka - testing, upstart issues found</li>
+<li>@neerfri - purge the cookbook .ruby-version</li>
+<li>@kangaroo - fixed slugdir creation</li>
+<li>@Milodv - DigitalOcean private networking patch</li>
+</ul>
+<p>Whew--we hope that's everyone! If we slighted your contributions, please let us know. We will gladly add it to these release notes.</p>
+<h2>Known Issues</h2>
+<h3>Proxy for Platform Services</h3>
+<p>As part of moving Deis into Docker containers, we had to change the exposed ports for some core platform services. For example, the Django API server is now exposed on 8000/tcp rather than 80/tcp. We will soon distribute a <a href="https://github.com/opdemand/deis/issues/535">new proxy service</a> that exposes the platform components on standard ports.</p>
+<h3>Container Timeouts</h3>
+<p>We have seen some issues with timeouts due to the public Docker Index. This can manifest as timeout errors when bootstrapping nodes. Typically re-running the provisioning operations will resolve the issue. We are working with the Docker team on a more robust resolution.</p>
+<h2>What's Next?</h2>
+<h3>Documentation Improvements</h3>
+<p>Update documentation to catch up with changes from the switching to a Docker-based system. We would like to add a description of the new container architecture as well as instructions for using the new <code>Dockerfile</code> build workflow.</p>
+<h3>Enterprise-Grade Scheduler</h3>
+<p>We are now prototyping a new scheduler based on <a href="https://mesos.apache.org/">Apache Mesos</a>, an enterprise-grade cluster manager. This change to the scheduler implementation will be transparent to end users, but should allow Deis to scale to 10,000+ nodes.</p>
+<h3>Promote artifacts from Docker Registry</h3>
+<p>In order to facilitate a streamlined CI/CD process, we need an ability to promote existing Docker images as builds (bypassing the <code>git push</code> process). We are currently investigating the best workflow.</p>
+<h3>SSL &amp; General Security Improvements</h3>
+<p>For more details, <a href="https://github.com/opdemand/deis/issues?labels=security&amp;state=open">see issues tagged security</a> on GitHub.</p>
+<h2>Future</h2>
+<h3>Remove the Chef Dependency</h3>
+<p>Though Chef will continue to be the recommended way to deploy Deis, we are moving away from requiring a Chef Server and using Data Bags for cluster configuration. Once we implement the new scheduler, we can remove the Chef dependency and provide support for other configuration management solutions (Puppet, Ansible, Salt).</p>
+<h3>Service Gateway</h3>
+<p>We need to make it as easy for ops folks to publish a set of reusable backing services (databases, queues, storage, etc) and allow developers to attach those services to applications. This will be done in a loosely coupled way, following Twelve Factor best practices. You can review the initial implementation and follow progress <a href="https://github.com/opdemand/deis/issues/231">on this GitHub issue</a>.</p>
+<h3>Interactive <code>deis run</code></h3>
+<p>Though we provide the ability to run admin commands inside containers, we don't currently support interactive shells into containers (i.e. <code>deis run bash</code>). Once this infrastructure is in place, this will also allow us to implement log tailing and other real-time features.</p>
+<h3>Support for <code>deis push</code> deploys</h3>
+<p>Users should be able to push builds to Deis even if they don't use <code>git</code>. We are investigating a <code>deis push</code> command that would not require a specific VCS.</p>
+<h2>How can you help?</h2>
+<ul>
+<li>Star our <a href="https://github.com/opdemand/deis">GitHub repository</a></li>
+<li>Help spread the word about <a href="http://twitter.com/opendeis">@opendeis</a> on Twitter</li>
+<li>Explore contributing to the Deis project by joining the #deis channel on Freenode</li>
+</ul>
+<p>You can learn about other ways to <a href="http://deis.io/get-involved/">get involved</a> on our website.</p>

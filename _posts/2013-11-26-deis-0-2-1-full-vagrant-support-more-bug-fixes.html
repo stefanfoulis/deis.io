@@ -1,0 +1,75 @@
+---
+layout: post
+title: Deis 0.2.1 - Full Vagrant Support, More Bug Fixes
+categories: []
+tags:
+- Docs
+- Release
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '5'
+  _aioseop_description: With 0.2.1 we've improved support for local testing with Vagrant,
+    added "bare metal" documentation and fixed many issues found by the Deis community.
+author: mboersma
+---
+<p>The Deis project is pleased to announce our v0.2.1 release. We've improved support for local testing with Vagrant, added "bare metal" documentation, and fixed many issues found by the Deis community.</p>
+<h2>What is Deis?</h2>
+<p>Deis is a Django/Celery API server, Python CLI and set of <a href="https://github.com/opdemand/deis-cookbook">Chef cookbooks</a> that combine to provide a Heroku-inspired application platform for public and private clouds.  Your PaaS. Your Rules.</p>
+<h2>0.2.1 Summary</h2>
+<h3>New Features</h3>
+<ul>
+<li>Full Vagrant provider support (0.2.0 supported a limited configuration)</li>
+<li>New Installation docs for "bare metal" nodes</li>
+</ul>
+<h3>Under the Hood</h3>
+<ul>
+<li>Updated EC2 AMIs and Vagrant .box for faster provisioning</li>
+<li>Simplified credentials discovery code</li>
+<li>Updated to latest progrium/buildstep with Ruby and PHP fixes</li>
+<li>Better isolation in client/tests test suite</li>
+</ul>
+<h3>Bug Fixes</h3>
+<ul>
+<li>Increased nginx server_names_hash_bucket_size to fix multiple app hosting</li>
+<li>Raise exception when not authorized to delete Chef node/client</li>
+<li>Ignore Chef 404s when destroying a node</li>
+<li>Fixed user entry being orphaned in deis-users Chef data bag</li>
+<li>Fixed old documentation being orphaned at rtfd.org</li>
+<li>Improved <code>deis run</code> before <code>git push</code> error message</li>
+<li>Fixed example-go app 502: Bad Gateway error</li>
+<li>Improved prompt after <code>deis nodes:scale dev runtime=0</code></li>
+</ul>
+<h3>Community Shout-Outs</h3>
+<p>We want to thank the following Deis community members for creating GitHub issues, providing support to others, and working on various Deis branches:</p>
+<ul>
+<li>@tombh - Tom took the training wheels off our Vagrant provider support and turned it into the preferred way to test and develop Deis. This has literally saved us money--thanks Tom! And he has many more great ideas up his sleeve...</li>
+<li>@nightshade427 - Fixed virtualenv python invocation in buildstep-hook and some promising chat about Linode support.</li>
+<li>@jfairbairn, @ianthedeveloper  - Vagrant.box download error catch and testing.</li>
+<li>@alexandrz - DigitalOcean testing</li>
+<li>@malandrew - Found registration error when missing URL schema, requested alternate AWS_* var support</li>
+<li>@bacongobbler - Improved DigitalOcean error messages, helped with commentary on many issues, tons of IRC and GitHub support as always. Thanks Matt!</li>
+</ul>
+<h2>What's Next?</h2>
+<ol>
+<li><strong><em>Team Support / Sharing</em></strong>. The mechanisms for sharing Formations and Apps are already implemented in a branch; we need to write more tests, implement some access control endpoints and make some changes to the gitosis data bag.</li>
+<li><strong><em>Docker 0.7.0 Integration</em></strong>. The new Docker fixes several issues and removes a dependency on AUFS that may allow Deis to run on more flavors of Linux.</li>
+<li><strong><em>Improved Documentation</em></strong> There are a few items that require better documentation including how to setup a static formation on bare metal.  We also need to provide a Tutorial that walks through advanced usage of the CLI, including how to create custom layers.</li>
+</ol>
+<h2>Future</h2>
+<h3>Enhanced Docker Integration</h3>
+<p>Deis currently uses Docker as a LXC wrapper for running Heroku Buildpack slugs that are bind-mounted into <a href="https://github.com/opdemand/buildstep">Buildstep</a> images.  As soon as the Docker Private Registry code stabilizes, we will be adding a new <code>git push</code> build process that creates and distributes images via <code>Dockerfile</code> and a private registry hosted on the controller.</p>
+<h3>General Security Improvements</h3>
+<p>Both the controller and formation proxies require SSL configuration.  Right now controller sessions are just HTTP with cookies and passwords sent in the clear!  We've also glossed over some pretty important security features in an effort to get Deis into developers hands.  For example, we need to implement iptables host-level firewalls, improve security group default rules, use Chef recipes to harden systems, etc.  If you find any other security holes, please <a href="https://github.com/opdemand/deis/issues">open a GitHub issue</a> and tag it "Security".</p>
+<h3>Health Checks</h3>
+<p>We do not currently monitor nodes or container health -- though we have infrastructure in place to do it.</p>
+<h3>Service Registry</h3>
+<p>We need to make it as easy for ops folks to publish a set of reusable backing services (databases, queues, storage, etc) and allow developers to attach those services to applications.  This will be done in a loosely coupled way, following Twelve Factor best practices.</p>
+<h2>How can you help?</h2>
+<ul>
+<li>Star our <a href="https://github.com/opdemand/deis">GitHub repository</a></li>
+<li>Help spread the word about <a href="http://twitter.com/opendeis">@opendeis</a> on Twitter</li>
+<li>Explore contributing to the Deis project by joining the #deis channel on Freenode</li>
+</ul>
+<p>You can learn about other ways to <a href="http://deis.io/get-involved/">get involved</a> on our website.</p>

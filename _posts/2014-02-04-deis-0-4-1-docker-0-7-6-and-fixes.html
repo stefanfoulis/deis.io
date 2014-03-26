@@ -1,0 +1,74 @@
+---
+layout: post
+title: Deis 0.4.1 - Docker 0.7.6 and Fixes
+categories: []
+tags:
+- Docs
+- Release
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '6'
+  _aioseop_description: This version updates Docker to v0.7.6 and fixes several issues.
+author: mboersma
+---
+<p>The Deis project is happy to announce our v0.4.1 release. This version updates Docker to v0.7.6 and fixes several issues.</p>
+<h2>What is Deis?</h2>
+<p>Deis is a Django/Celery API server, Python CLI and set of <a href="https://github.com/opdemand/deis-cookbook">Chef cookbooks</a> that combine to provide a Heroku-inspired application platform for public and private clouds.  Your PaaS. Your Rules.</p>
+<h2>0.4.1 Summary</h2>
+<h3>Under the Hood</h3>
+<ul>
+<li>Updated to Docker 0.7.6</li>
+<li>Updated knife-digital_ocean to 0.4.0</li>
+<li>Updated celery, requests, and Sphinx python libraries</li>
+</ul>
+<h3>Bug Fixes</h3>
+<ul>
+<li>Fixed <code>deis nodes:scale</code> orphaning nodes on DigitalOcean</li>
+<li>Fixed consistency in arg parsing for <code>deis config:list</code> and <code>containers:list</code></li>
+<li>Added "by path" option to interactive <code>deis keys:add</code></li>
+<li>Fixed handling of "--app" parameter in <code>deis scale</code></li>
+<li>Allow Deis to run from Vagrant dir with spaces in the path</li>
+<li>Remove old chef keys on Deis base images</li>
+<li>Install inotify-tools to Deis base images</li>
+<li>Skip docker steps if it's already installed</li>
+</ul>
+<h3>Community Shout-Outs</h3>
+<p>We want to thank the following Deis community members for creating GitHub issues, providing support to others, and working on various Deis branches:</p>
+<ul>
+<li>@niccolox - 12-factor persistence and Xen/OpenShift discussions</li>
+<li>@nathansamson - several bug fixes and CLI improvements, lots of great feedback, custom domains PR</li>
+<li>@shredder12 - Clarifications to Chef admins documentation</li>
+<li>@thpham - packer.io proposal for DigitalOcean provisioning</li>
+<li>@paulczar - Chef cleanup and fixes</li>
+<li>@jfw - Significant typo fix in docs</li>
+<li>@ksikka - Major bug hunting, tons of IRC help</li>
+<li>@danscan - Bug finding</li>
+<li>@tombh  Bug fixes, pull requests, Deis services work, lots of IRC &amp; GitHub support</li>
+<li>@bacongobbler - Bug finding, Deis services design &amp; implentation, IRC &amp; GitHub support</li>
+</ul>
+<h2>What's Next?</h2>
+<ol>
+<li>
+<p><strong><em>Containerization of Deis Components</em></strong>.  Converting all the Deis components to Docker images is done and being tested in the <em>containerize</em> branch. This will result in a more modular system that's easier to deploy and manage.</p>
+</li>
+<li>
+<p><strong><em>Enhanced Docker Integration</em></strong>. Deis currently uses Docker as a LXC wrapper for running Heroku Buildpack slugs that are bind-mounted into containers.  We will sonn add a new <code>git push</code> build process that creates and distributes images via <code>Dockerfile</code> and a private Docker registry.  Follow progress <a href="https://github.com/opdemand/deis/issues/152">on this GitHub issue</a>.</p>
+</li>
+<li>
+<p><strong><em>Interactive <code>deis run</code></em></strong> Though we provide the ability to run admin commands inside containers, we don't currently support interactive shells into containers.  We will soon.</p>
+</li>
+</ol>
+<h2>Future</h2>
+<h3>Service Registry</h3>
+<p>We need to make it as easy for ops folks to publish a set of reusable backing services (databases, queues, storage, etc) and allow developers to attach those services to applications.  This will be done in a loosely coupled way, following Twelve Factor best practices.  You can review the initial implementation and follow progress <a href="https://github.com/opdemand/deis/issues/231">on this GitHub issue</a>.</p>
+<h3>General Security Improvements</h3>
+<p>The controllers require <a href="https://github.com/opdemand/deis/issues/18">SSL configuration</a>.  Right now controller sessions are just HTTP with cookies and passwords sent in the clear!  We've also glossed over some pretty important security features in an effort to get Deis into developers hands.  For example, we need to implement iptables host-level firewalls, improve security group default rules, use Chef recipes to <a href="https://github.com/opdemand/deis/issues/27">harden systems</a>, etc.</p>
+<h2>How can you help?</h2>
+<ul>
+<li>Star our <a href="https://github.com/opdemand/deis">GitHub repository</a></li>
+<li>Help spread the word about <a href="http://twitter.com/opendeis">@opendeis</a> on Twitter</li>
+<li>Explore contributing to the Deis project by joining the #deis channel on Freenode</li>
+</ul>
+<p>You can learn about other ways to <a href="http://deis.io/get-involved/">get involved</a> on our website.</p>

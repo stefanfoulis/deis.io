@@ -1,0 +1,83 @@
+---
+layout: post
+title: Deis 0.5.2 - Maintenance Release
+categories: []
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '5'
+author: mboersma
+---
+<p>We are happy to announce our v0.5.2 release. This maintenance release fixes several issues found by the Deis community and improves the documentation in many areas.</p>
+<h2>What is Deis?</h2>
+<p>Deis is a Django/Celery API server, Python CLI and set of <a href="https://github.com/opdemand/deis-cookbook">Chef cookbooks</a> that combine to provide a Heroku-inspired application platform for public and private clouds. Your PaaS. Your Rules.</p>
+<h2>0.5.2 Summary</h2>
+<h3>Doc Improvements</h3>
+<ul>
+<li>Added description of new containerized architecture</li>
+<li>Added documentation for the new Dockerfile workflow</li>
+<li>Fixed REST API and admin.py doc pages generation error</li>
+<li>Made notes neon pink and warnings neon orange</li>
+<li>Updated Deis Controller installation docs across all providers</li>
+<li>Added rsyslog export documentation</li>
+<li>Document how to store Docker registry images in S3</li>
+</ul>
+<h3>Under the Hood</h3>
+<ul>
+<li>Updated to dop 0.1.6 for DigitalOcean support</li>
+</ul>
+<h3>Bug Fixes</h3>
+<ul>
+<li>Fixed error when doing <code>deis config:set</code> before a build exists</li>
+<li>Fixed EtcdException when running deis/server unit tests</li>
+<li>Removed some cruft from Deis' TravisCI.org integration</li>
+<li>Many fixes to Rackspace cloud support</li>
+<li>Fixed "sudo dsh" error when finishing provisioning on Vagrant</li>
+<li>Fixed failure when app name is less than 4 characters long</li>
+<li>Fixed 500 error when creating a formation without provider credentials</li>
+<li>Several changes to Vagrant scripts to align with other providers</li>
+<li>Allow extra parameters for private networking support for DigitalOcean</li>
+<li>Increased timeouts to help with "docker pull" issues</li>
+</ul>
+<h3>Community Shout-Outs</h3>
+<p>We want to thank the following Deis community members for creating GitHub issues, providing support to others, and working on various Deis branches:</p>
+<ul>
+<li>@tombh - <code>sudo dsh</code> fix, vagrant provisioning changes, help and support as always</li>
+<li>@tscheepers - updated vagrant README</li>
+<li>@azurewraith - <code>docker pull</code> timeouts issue, lots of testing</li>
+<li>@Milodv - DigitalOcean private networking support</li>
+<li>@ksikka - S3 registry images docs request</li>
+<li>@davidcollom - Rackspace bug finding and testing</li>
+</ul>
+<h2>Known Issues</h2>
+<h3>Proxy for Platform Services</h3>
+<p>As part of moving Deis into Docker containers, we had to change the exposed ports for some core platform services.  For example, the Django API server is now exposed on 8000/tcp rather than 80/tcp.  We will soon distribute a <a href="https://github.com/opdemand/deis/issues/535">new proxy service</a> that exposes the platform components on standard ports.</p>
+<h3>Container Timeouts</h3>
+<p>We have seen some issues with timeouts due to the public Docker Index.  This can manifest as timeout errors when bootstrapping nodes.  Typically re-running the provisioning operations will resolve the issue.  We are working with the Docker team on a more robust resolution.</p>
+<h2>What's Next?</h2>
+<h3>Docker Run Deis</h3>
+<p>Making Deis easier to install is one of our primary goals, and one of the driving forces behind our decision to containerize all the Deis components.  Running Deis should be as easy as <code>docker run deis/deis</code>.  We have a working prototype today. However, this will require some careful project restructuring on GitHub.</p>
+<h3>Enterprise-Grade Scheduler</h3>
+<p>We are now prototyping a new scheduler based on <a href="https://mesos.apache.org/">Apache Mesos</a>, an enterprise-grade cluster manager.  This change to the scheduler implementation will be transparent to end users, but should allow Deis to scale to 10,000+ nodes.</p>
+<h3>Promote artifacts from Docker Registry</h3>
+<p>In order to facilitate a streamlined CI/CD process, we need an ability to promote existing Docker images as builds (bypassing the <code>git push</code> process).  We are currently investigating the best workflow.</p>
+<h3>SSL &amp; General Security Improvements</h3>
+<p>For more details, <a href="https://github.com/opdemand/deis/issues?labels=security&amp;state=open">see issues tagged security</a> on GitHub.</p>
+<h2>Future</h2>
+<h3>Remove the Chef Dependency</h3>
+<p>Though Chef will continue to be the recommended way to deploy Deis, we are moving away from requiring a Chef Server and using Data Bags for cluster configuration.  Once we implement the new scheduler, we can remove the Chef dependency and provide support for other configuration management solutions (Puppet, Ansible, Salt).</p>
+<h3>Service Gateway</h3>
+<p>We need to make it as easy for ops folks to publish a set of reusable backing services (databases, queues, storage, etc) and allow developers to attach those services to applications.  This will be done in a loosely coupled way, following Twelve Factor best practices.  You can review the initial implementation and follow progress <a href="https://github.com/opdemand/deis/issues/231">on this GitHub issue</a>.</p>
+<h3>Interactive <code>deis run</code></h3>
+<p>Though we provide the ability to run admin commands inside containers, we don't currently support interactive shells into containers (i.e. <code>deis run bash</code>).  Once this infrastructure is in place, this will also allow us to implement log tailing and other real-time features.</p>
+<h3>Support for <code>deis push</code> deploys</h3>
+<p>Users should be able to push builds to Deis even if they don't use <code>git</code>.  We are investigating a <code>deis push</code> command that would not require a specific VCS.</p>
+<h2>How can you help?</h2>
+<ul>
+<li>Star our <a href="https://github.com/opdemand/deis">GitHub repository</a></li>
+<li>Help spread the word about <a href="http://twitter.com/opendeis">@opendeis</a> on Twitter</li>
+<li>Explore contributing to the Deis project by joining the #deis channel on Freenode</li>
+</ul>
+<p>You can learn about other ways to <a href="http://deis.io/get-involved/">get involved</a> on our website.</p>

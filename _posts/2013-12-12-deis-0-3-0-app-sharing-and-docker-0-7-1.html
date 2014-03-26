@@ -1,0 +1,92 @@
+---
+layout: post
+title: Deis 0.3.0 - App Sharing and Docker 0.7.1
+categories: []
+tags:
+- Docs
+- Release
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '5'
+  _wp_old_slug: deis-0-3-0-team-support-and-docker-0-7-1
+  _aioseop_description: New support for team workflows & app sharing, documentation
+    for operations folks, developers, and contributors, and more reliable components
+    for the Deis controller.
+author: mboersma
+---
+<p>The Deis project is thrilled to announce our v0.3.0 release. We've added support for team workflows with App sharing, beefed up our documentation for operations folks, developers, and contributors, and tightened up the Deis controller with updated components including the Flynn project's slugbuilder and slugrunner.</p>
+<h2>What is Deis?</h2>
+<p>Deis is a Django/Celery API server, Python CLI and set of <a href="https://github.com/opdemand/deis-cookbook">Chef cookbooks</a> that combine to provide a Heroku-inspired application platform for public and private clouds. Your PaaS. Your Rules.</p>
+<h2>0.3.0 Summary</h2>
+<h3>New Features</h3>
+<ul>
+<li><code>deis sharing</code> allows multiple users to push to an application</li>
+<li>First user to register is the admin, who can grant admin permission to others</li>
+<li>Formation, Node, and Layer access is restricted to admin users</li>
+<li>Default formation -- if only one formation exists on the controller, you can omit <code>--formation=foo</code> when creating an App.</li>
+<li><a href="http://docs.deis.io/en/latest/operations/">Operations Guide</a> explains how to set up a Deis controller, from configuring Chef to deploying a Formation.</li>
+<li><a href="http://docs.deis.io/en/latest/developer/">Developer Guide</a> explains how to work with a Deis controller, from registering to deploying and managing an App.</li>
+<li><a href="http://docs.deis.io/en/latest/topologies/">Topologies</a> provides examples for setting up single, dual, or multi-node Formations.</li>
+<li><a href="http://docs.deis.io/en/latest/contributing/localdev/">Local Development</a> helps contributors get up and running with Deis on Vagrant.</li>
+</ul>
+<h3>Under the Hood</h3>
+<ul>
+<li>Updated to Docker 0.7.1</li>
+<li>More reliable container management inspired by the <a href="https://github.com/bflad/chef-docker">chef-docker</a> project</li>
+<li>Replaced buildstep with the more modular <a href="https://github.com/flynn/slugbuilder">flynn/slugbuilder</a> and <a href="https://github.com/flynn/slugrunner">flynn/slugrunner</a></li>
+<li>Automatically remove leftover Docker containers on build and runtime hosts</li>
+<li>Updated to Django 1.6, celery 3.1.6, gevent 1.0</li>
+<li>Removed unused socialaccount and djcelery apps</li>
+<li>Downgraded to stable Berkshelf 2.0.10</li>
+<li>Rehabilitated full integration tests in client/tests</li>
+<li>Added unit tests for sharing and web views</li>
+</ul>
+<h3>Bug Fixes</h3>
+<ul>
+<li>Fixed 500 error when destroying a node or formation that no longer exists</li>
+<li>Fixed environment variable availability in <code>deis run</code> commands</li>
+<li>Fixed queries for Layer which could raise MultipleObjectsReturned</li>
+<li>Fixed upstart scripts not being re-read on service restart</li>
+<li>Fixed celery task chaining for better concurrency</li>
+</ul>
+<h3>Community Shout-Outs</h3>
+<p>We want to thank the following Deis community members for creating GitHub issues, providing support to others, and working on various Deis branches:</p>
+<ul>
+<li>@bacongobbler - Vagrant testing &amp; bug hunting, DigitalOcean documentation, and tireless support on IRC and GitHub comments.</li>
+<li>@tombh - Vagrant testing &amp; GitHub support, improvements to DigitalOcean provisioning script, advice on devmode flag.</li>
+<li>@bflad - Review of deis-cookbook and fix for <code>restart deis-server</code> issue.</li>
+<li>@jeff-french - Default formation request (implemented).</li>
+<li>@jof - Help with nodes not already running AUFS.</li>
+<li>@kumavis - Typo fixing.</li>
+<li>@alanjds - DigitalOcean testing, gevent bug report (fixed).</li>
+<li>@punnie - Rackspace testing, buildstep / node converge error report (closed).</li>
+<li>@warpr - Caught a 404 for our old installation doc (fixed).</li>
+</ul>
+<h2>What's Next?</h2>
+<ol>
+<li>
+<p><strong><em>Containerization of Deis Components</em></strong>. Now that Docker 0.7 has been released, we're ready to start containerizing all of the Deis components. This will result in a more modular system that's easier to deploy and manage.</p>
+</li>
+<li>
+<p><strong><em>Interactive <code>deis run</code></em></strong> Though we provide the ability to run admin commands inside containers, we don't currently support interactive shells into containers. We will soon.</p>
+</li>
+<li>
+<p><strong><em>Release Rollback and Auditing</em></strong> We need to provide developers the ability to rollback to a previous release. While we have the infrastructure in place to do this, we don't yet tag releases with meaningful log events that describe what was changed.</p>
+</li>
+</ol>
+<h2>Future</h2>
+<h3>Enhanced Docker Integration</h3>
+<p>Deis currently uses Docker as a LXC wrapper for running Heroku Buildpack slugs that are bind-mounted into containers. We will sonn add a new <code>git push</code> build process that creates and distributes images via <code>Dockerfile</code> and a private Docker registry. Follow progress <a href="https://github.com/opdemand/deis/issues/152">on this GitHub issue</a>.</p>
+<h3>Service Registry</h3>
+<p>We need to make it as easy for ops folks to publish a set of reusable backing services (databases, queues, storage, etc) and allow developers to attach those services to applications. This will be done in a loosely coupled way, following Twelve Factor best practices. You can review the specification and follow progress <a href="https://github.com/opdemand/deis/issues/231">on this GitHub issue</a>.</p>
+<h3>General Security Improvements</h3>
+<p>The controllers require <a href="https://github.com/opdemand/deis/issues/18">SSL configuration</a>. Right now controller sessions are just HTTP with cookies and passwords sent in the clear! We've also glossed over some pretty important security features in an effort to get Deis into developers hands. For example, we need to implement iptables host-level firewalls, improve security group default rules, use Chef recipes to <a href="https://github.com/opdemand/deis/issues/27">harden systems</a>, etc.</p>
+<h2>How can you help?</h2>
+<ul>
+<li>Star our <a href="https://github.com/opdemand/deis">GitHub repository</a></li>
+<li>Help spread the word about <a href="http://twitter.com/opendeis">@opendeis</a> on Twitter</li>
+<li>Explore contributing to the Deis project by joining the #deis channel on Freenode</li>
+</ul>
+<p>You can learn about other ways to <a href="http://deis.io/get-involved/">get involved</a> on our website.</p>

@@ -1,0 +1,56 @@
+---
+layout: post
+title: Deis 0.0.5 - Public Beta
+categories: []
+tags:
+- Docs
+- Release
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '5'
+  _aioseop_description: Ready to deploy your own private PaaS based on Chef, Docker
+    and Heroku Buildpacks?  The Deis project is excited to announce our public beta!
+  _aioseop_title: Deis 0.0.5 - Public Beta
+author: gabrtv
+---
+<p>Ready to deploy your own private PaaS based on Chef, Docker and Heroku Buildpacks?  The Deis project is excited to announce our public beta!</p>
+<h2>What is Deis?</h2>
+<p>Deis is a Django/Celery API server, Python CLI and set of <a href="https://github.com/opdemand/deis-cookbook">Chef cookbooks</a> that combine to provide a Heroku-inspired application platform for public and private clouds.  Your PaaS. Your Rules.</p>
+<h2>0.0.5 Summary</h2>
+<ul>
+<li>New <a href="http://deis.io">http://deis.io</a> website with integrated documentation</li>
+<li>Sphinx docs including concepts, installation, usage, terms and full API reference</li>
+<li>Bug fixes found during end-to-end testing</li>
+<li>Reset of south migrations in preparation for public release</li>
+<li>Published deis-cookbooks to Chef community site</li>
+</ul>
+<h2>What's Next?</h2>
+<h3>Enhanced Docker Integration</h3>
+<p>Deis currently uses Docker as a LXC wrapper for running Buildpack slugs that are bind-mounted into default <a href="https://github.com/opdemand/buildstep">Buildstep</a> images.  We will be adding a new build process that creates and distributes images via <code>Dockerfile</code> builds and a private registry.  We will also allow builds to reference existing Docker images by a fully qualified image path.</p>
+<h3>Log Aggregation</h3>
+<p>Deis will not be ready for production use until we have a log aggregation solution that provides end-users with a <code>deis logs</code> command.  This is critical for troubleshooting app deployment issues.  We also need a way to drain logs into tools like Splunk, Logstash, Graylog2, etc.</p>
+<h3>Admin Commands</h3>
+<p>Most frameworks require running one-off admin commands to setup databases, inspect settings and offer visibility into the Docker-based runtime environment.  We will build a solution that offers a <code>deis run bash</code> capability.</p>
+<h3>SSL Support</h3>
+<p>Both the controller and formation proxies require SSL configuration.  Right now it's just HTTP with cookies and passwords sent in the clear!</p>
+<h3>General Security Improvements</h3>
+<p>We've glossed over some pretty important security features in an effort to get Deis into developers hands sooner rather than later.  For example, we need to implement iptables host-level firewalls, improve security group default rules, use Chef recipes to harden systems, etc.  If you find any other security holes, please open a GitHub issue and tag it "Security".</p>
+<h2>Future</h2>
+<h3>Team Support</h3>
+<p>As of now, only a single user can control or push to a formation.  We need to add simple sharing features, which we can then expand upon using finer-grained access controls.</p>
+<h3>Health Checks</h3>
+<p>We do not currently monitor nodes or container health -- though we have infrastructure in place to do it.</p>
+<h3>Cross-provider Formations</h3>
+<p>We are very close to offering cross-provider formations, where a single app deployment can span multiple zones, regions or even providers -- while being driven by a single <code>git push</code> or <code>deis</code> command.</p>
+<h3>Service Discovery</h3>
+<p>We need to make it as easy for ops folks to publish a set of reusable backing services (databases, queues, storage, etc) and allow developers to attach those services to formations.  This will be done in a loosely coupled way, following Twelve Factor best practices.</p>
+<h2>How can you help?</h2>
+<p>Deis is still in its early stages -- we can use all the help we can get!</p>
+<ul>
+<li>Star our <a href="https://github.com/opdemand/deis">GitHub repository</a></li>
+<li>Help spread the word about @opendeis on Twitter</li>
+<li>Explore contributing to the Deis project by joining the #deis channel on Freenode</li>
+</ul>
+<p>You can learn about other ways to <a href="http://deis.io/get-involved/">get involved</a> on our website.</p>

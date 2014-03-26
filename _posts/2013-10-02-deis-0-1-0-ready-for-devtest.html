@@ -1,0 +1,99 @@
+---
+layout: post
+title: Deis 0.1.0 - Ready for Dev/Test
+categories: []
+tags:
+- Docs
+- Release
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '5'
+  _aioseop_description: The Deis project is proud to announce our v0.1.0 release,
+    including a number of important new features.  Deis is now ready for your dev/test
+    environments!
+author: gabrtv
+---
+<p>The Deis project is proud to announce our v0.1.0 release. This release includes some important new features and puts a number of backwards-incompatible changes behind us. As of today, Deis is now ready for your dev/test environments! In the next month or so, we hope to have Deis ready for use with production applications.</p>
+<h2>What is Deis?</h2>
+<p>Deis is a Django/Celery API server, Python CLI and set of <a href="https://github.com/opdemand/deis-cookbook">Chef cookbooks</a> that combine to provide a Heroku-inspired application platform for public and private clouds. Your PaaS. Your Rules.</p>
+<h2>0.1.0 Summary</h2>
+<h3>New Features</h3>
+<ul>
+<li>Formations now support multiple applications with wildcard DNS, making them truly multi-tenant</li>
+<li>Nodes can now be added to formations without automated provisioning, allowing manually constructed formations that can use bare-metal servers</li>
+<li>Layers can now function as both runtime (hosts containers) and proxy (routes to containers), which means you can test a Deis formation with 1 node</li>
+<li>Configuration management interface is now modularized with Chef and Mock backends; integrating other CM backends is now possible</li>
+<li>CLI acceptance tests now cover the majority of the Deis client workflow</li>
+<li>Account cancellation is now available using <code>deis auth:cancel</code></li>
+</ul>
+<h3>Under The Hood</h3>
+<ul>
+<li>Updated to Docker 0.6.3</li>
+<li>Replaced Ubuntu <code>cloud-init</code> with the more portable <code>knife bootstrap</code></li>
+<li>Refactored configuration management logic into separate <code>cm</code> package</li>
+<li>Created separate <code>provider</code> package with proper mock module</li>
+<li>Deprecated <code>provider.controller</code> module now handled by <code>cm</code></li>
+<li>Deprecated <code>celerytasks</code> package in favor of <code>api.tasks</code> module</li>
+<li>Introduced new <code>Application</code> object that resides on a <code>Formation</code></li>
+<li>Updated a number of Python libraries including: django, boto, paramiko and requests (2.0)</li>
+</ul>
+<h4>Bug Fixes</h4>
+<ul>
+<li>Application endpoints no longer 500 when the application has been deleted</li>
+<li>Fixed problem accessing flavors with underscores in their name</li>
+<li>Fixed bug with containers not starting after <code>containers:scale</code> operation</li>
+<li>Fixed issue with <code>containers:list</code> returning a <code>TypeError</code></li>
+<li>Fixed client registration failure due to bad content-type</li>
+<li>Fixed login issue due to new Django <code>is_active</code> behavior</li>
+</ul>
+<h4>Other Changes</h4>
+<ul>
+<li>Updated <a href="http://deis.io/">http://deis.io/</a> site with new command-line workflows</li>
+<li>Docstrings cleanup across all modules</li>
+<li>Updated Django Admin site with new object model</li>
+<li>Updated <code>REST API</code> documentation with new endpoints</li>
+<li>Made Get Deis page shorter and simpler</li>
+<li><code>knife</code> output written to celery logs regardless of success or failure (for debugging)</li>
+<li><code>deis register</code> now asks for password confirmation</li>
+<li>Updated EC2 AMIs with new v0.1.0 images</li>
+</ul>
+<h2>Community Shout Outs</h2>
+<p>We would like to give a big shout out to Matthew Fisher, aka <a href="https://twitter.com/bacongobbler">@bacongobbler</a>, who has made large contributions to the Deis community since our last release. In addition to spearheading our DigitalOcean integration, he has also submitted a number of important pull requests and bug fixes for 0.1.0. Thank you Matthew!</p>
+<p>We'd also like to thank the following users for taking the time to file issues via GitHub:</p>
+<ul>
+<li>@jschneiderhan - <a href="https://github.com/opdemand/deis-cookbook/pull/5">Removing user from container</a></li>
+<li>@lakeslc - <a href="https://github.com/opdemand/deis/issues/169">Controller provisioning issue</a></li>
+<li>@mikeclarke - <a href="https://github.com/opdemand/deis/issues/199">Add support for VPC in EC2 provider</a></li>
+<li>@guestisp - <a href="https://github.com/opdemand/deis/issues/187">Issues with Hosted Chef Server</a></li>
+</ul>
+<h2>What's Next?</h2>
+<p>Now that we have some important refactoring and object model changes behind us, the Deis project will be focused on 3 main areas:</p>
+<ol>
+<li><strong>Consolidating the core Deis workflow</strong> which includes fixing bugs, improving our Chef/Docker integration and tightening platform security</li>
+<li><strong>Extending Deis to new providers</strong> like DigitalOcean and Rackspace, while also ensuring formations can be constructed manually from existing nodes (bare metal or otherwise)</li>
+<li><strong>Adding a key features</strong> including Team Support (access controls), Health Checks and a Service Registry for attaching backing services</li>
+</ol>
+<h3>DigitalOcean Provider</h3>
+<p>We've had many <a href="https://github.com/opdemand/deis/issues/73">requests for a DigitalOcean provider</a>. Thanks to the efforts of @bacongobbler, we are very close! We are now working with Moisey Uretsky and the DigitalOcean crew to get a Deis-optimized image publicly available via the DigitalOcean console and API. The image needs to be Ubuntu 12.04 LTS with a 3.8 kernel for Docker support. We hope to have DigitalOcean available within the next 2 weeks.</p>
+<h3>Rackspace Provider</h3>
+<p>We are actively working on <a href="https://github.com/opdemand/deis/issues/121">Rackspace Cloud Integration</a> with the help of Jesse Noller and the team at Rackspace. The biggest hurdle is speeding up instance boot times, which are currently not practical. We are exploring ways to speed node boot times. We hope to have Rackspace available in the next 2 weeks.</p>
+<h3>Enhanced Docker Integration</h3>
+<p>Deis currently uses Docker as a LXC wrapper for running Heroku Buildpack slugs that are bind-mounted into <a href="https://github.com/opdemand/buildstep">Buildstep</a> images. As soon as the Docker Private Registry code stabilizes, we will be adding a new <code>git push</code> build process that creates and distributes images via <code>Dockerfile</code> and a private registry hosted on the controller.</p>
+<h3>General Security Improvements</h3>
+<p>Both the controller and formation proxies require SSL configuration. Right now controller sessions are just HTTP with cookies and passwords sent in the clear! We've also glossed over some pretty important security features in an effort to get Deis into developers hands. For example, we need to implement iptables host-level firewalls, improve security group default rules, use Chef recipes to harden systems, etc. If you find any other security holes, please <a href="https://github.com/opdemand/deis/issues">open a GitHub issue</a> and tag it "Security".</p>
+<h2>Future</h2>
+<h3>Team Support</h3>
+<p>As of now, only a single user can control a formation or push to an application. We need to add simple sharing features, which we can then expand upon using finer-grained access controls.</p>
+<h3>Health Checks</h3>
+<p>We do not currently monitor nodes or container health -- though we have infrastructure in place to do it.</p>
+<h3>Service Registry</h3>
+<p>We need to make it as easy for ops folks to publish a set of reusable backing services (databases, queues, storage, etc) and allow developers to attach those services to applications. This will be done in a loosely coupled way, following Twelve Factor best practices.</p>
+<h2>How can you help?</h2>
+<ul>
+<li>Star our <a href="https://github.com/opdemand/deis">GitHub repository</a></li>
+<li>Help spread the word about <a href="http://twitter.com/opendeis">@opendeis</a> on Twitter</li>
+<li>Explore contributing to the Deis project by joining the #deis channel on Freenode</li>
+</ul>
+<p>You can learn about other ways to <a href="http://deis.io/get-involved/">get involved</a> on our website.</p>

@@ -1,0 +1,85 @@
+---
+layout: post
+title: Deis 0.3.1 - Fixes and Docs
+categories: []
+tags:
+- Docs
+- Release
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '6'
+  _aioseop_description: 'Usage of Deis has begun to take off, and this maintenance
+    release implements and fixes nearly everything reported by the user community
+    so far. '
+author: mboersma
+---
+<p>The Deis project is happy to announce our v0.3.1 release. Usage of Deis has begun to take off, and the user community has been extremely helpful in finding issues and suggesting improvements. This is a maintenance release that implements and fixes nearly everything reported so far. Please keep the feedback coming!</p>
+<h2>What is Deis?</h2>
+<p>Deis is a Django/Celery API server, Python CLI and set of <a href="https://github.com/opdemand/deis-cookbook">Chef cookbooks</a> that combine to provide a Heroku-inspired application platform for public and private clouds. Your PaaS. Your Rules.</p>
+<h2>0.3.1 Summary</h2>
+<h3>New Features</h3>
+<ul>
+<li>Added navigation between documentation versions, e.g.:</li>
+<li><a href="http://docs.deis.io/en/latest/">http://docs.deis.io/en/latest/</a></li>
+<li><a href="http://docs.deis.io/en/v0.3.1/">http://docs.deis.io/en/v0.3.1/</a></li>
+<li>Added permalinks to documentation headers</li>
+</ul>
+<h3>Under the Hood</h3>
+<ul>
+<li>Updated to Django 1.6.1</li>
+<li>Added several tests to the "make test" API suite</li>
+<li>Added unit tests for web/templatetags</li>
+<li>Updated boto, Sphinx, celery, django-restframework</li>
+</ul>
+<h3>Bug Fixes</h3>
+<ul>
+<li>Fixed env vars being sometimes unavailable in <code>deis run</code></li>
+<li>Return error detail in some <code>knife bootstrap</code> error cases</li>
+<li>Hid web signup form; use <code>deis register</code> from CLI</li>
+<li>Fixed <code>deis keys:add ~/.ssh/mykey.pub</code> argument handling</li>
+<li>Fixed client setup.py to install tested versions of support packages</li>
+<li>Fixed node deletion on DigitalOcean when provision script errors</li>
+<li>Fixed DigitalOcean provisioning script for Mac OS X</li>
+<li>Fixed EC2 security group deletion to be more robust</li>
+</ul>
+<h3>Community Shout-Outs</h3>
+<p>We want to thank the following Deis community members for creating GitHub issues, providing support to others, and working on various Deis branches:</p>
+<ul>
+<li>@tombh - DigitalOcean provision script fixes, Vagrant node destruction fix, proposed test improvements and slugbuilder hook relocation.</li>
+<li>@bacongobbler - Permalinks request, service discovery spec, stellar support on IRC and GitHub as always.</li>
+<li>@lvnilesh - Testing, many bug reports.</li>
+<li>@ksikka - Testing and bug reports.</li>
+<li>@dscanlonpa - Bug reports and testing.</li>
+<li>@alanjds - Bug reports with a side of testing.</li>
+<li>@mrkaspa - Doc bug report for stale install URL.</li>
+<li>@guestisp - Doc bug report for bare metal installation.</li>
+<li>@bengrunfeld - Env vars availability bug report, many months of testing and help!</li>
+</ul>
+<h2>What's Next?</h2>
+<ol>
+<li>
+<p><strong><em>Containerization of Deis Components</em></strong>. Converting all the Deis components to Docker images is well underway in the <em>containerize</em> branch. This will result in a more modular system that's easier to deploy and manage.</p>
+</li>
+<li>
+<p><strong><em>Release Rollback and Auditing</em></strong> We need to provide developers the ability to rollback to a previous release. While we have the infrastructure in place to do this, we don't yet tag releases with meaningful log events that describe what was changed.</p>
+</li>
+<li>
+<p><strong><em>Interactive <code>deis run</code></em></strong> Though we provide the ability to run admin commands inside containers, we don't currently support interactive shells into containers. We will soon.</p>
+</li>
+</ol>
+<h2>Future</h2>
+<h3>Enhanced Docker Integration</h3>
+<p>Deis currently uses Docker as a LXC wrapper for running Heroku Buildpack slugs that are bind-mounted into containers. We will sonn add a new <code>git push</code> build process that creates and distributes images via <code>Dockerfile</code> and a private Docker registry. Follow progress <a href="https://github.com/opdemand/deis/issues/152">on this GitHub issue</a>.</p>
+<h3>Service Registry</h3>
+<p>We need to make it as easy for ops folks to publish a set of reusable backing services (databases, queues, storage, etc) and allow developers to attach those services to applications. This will be done in a loosely coupled way, following Twelve Factor best practices. You can review the specification and follow progress <a href="https://github.com/opdemand/deis/issues/231">on this GitHub issue</a>.</p>
+<h3>General Security Improvements</h3>
+<p>The controllers require <a href="https://github.com/opdemand/deis/issues/18">SSL configuration</a>. Right now controller sessions are just HTTP with cookies and passwords sent in the clear! We've also glossed over some pretty important security features in an effort to get Deis into developers hands. For example, we need to implement iptables host-level firewalls, improve security group default rules, use Chef recipes to <a href="https://github.com/opdemand/deis/issues/27">harden systems</a>, etc.</p>
+<h2>How can you help?</h2>
+<ul>
+<li>Star our <a href="https://github.com/opdemand/deis">GitHub repository</a></li>
+<li>Help spread the word about <a href="http://twitter.com/opendeis">@opendeis</a> on Twitter</li>
+<li>Explore contributing to the Deis project by joining the #deis channel on Freenode</li>
+</ul>
+<p>You can learn about other ways to <a href="http://deis.io/get-involved/">get involved</a> on our website.</p>
