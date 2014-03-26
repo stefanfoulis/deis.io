@@ -148,36 +148,38 @@ connections or without any hiccups in new connections. In fact, it's so fast tha
 request/response time hardly feels anything due to how blazingly fast Redis works! For
 now, it's just a proof of concept, but we can do some pretty cool stuff with it:
 
-    $ dig registry.deisapp.com
-    [...]
-    ;; ANSWER SECTION:
-    registry.deisapp.com. 1649 IN  A   107.170.227.113
-    $ dig deisapp.com
-    [...]
-    ;; ANSWER SECTION:
-    deisapp.com.   1800    IN  A   107.170.227.113
-    $ ssh -i ~/.ssh/deis-controller root@deisapp.com
-    root@deis-controller-t1LHh:~# redis-cli
-    redis 127.0.0.1:6379> KEYS *
-    1) "deisapp.com"
-    2) "registry.deisapp.com"
-    redis 127.0.0.1:6379> GET registry.deisapp.com
-    "107.170.227.113:5000"
-    redis 127.0.0.1:6379> exit
-    root@deis-controller-t1LHh:~# curl -L registry.deisapp.com
-    "docker-registry server (dev)"
-    root@deis-controller-t1LHh:~# redis-cli
-    redis 127.0.0.1:6379> DEL registry.deisapp.com
-    (integer) 1
-    redis 127.0.0.1:6379> exit
-    root@deis-controller-t1LHh:~# curl -L registry.deisapp.com
-    <html>
-    <head><title>404 Not Found</title></head>
-    <body bgcolor="white">
-    <center><h1>404 Not Found</h1></center>
-    <hr><center>nginx/1.0.15</center>
-    </body>
-    </html>
+```bash
+$ dig registry.deisapp.com
+[...]
+;; ANSWER SECTION:
+registry.deisapp.com. 1649 IN  A   107.170.227.113
+$ dig deisapp.com
+[...]
+;; ANSWER SECTION:
+deisapp.com.   1800    IN  A   107.170.227.113
+$ ssh -i ~/.ssh/deis-controller root@deisapp.com
+root@deis-controller-t1LHh:~# redis-cli
+redis 127.0.0.1:6379> KEYS *
+1) "deisapp.com"
+2) "registry.deisapp.com"
+redis 127.0.0.1:6379> GET registry.deisapp.com
+"107.170.227.113:5000"
+redis 127.0.0.1:6379> exit
+root@deis-controller-t1LHh:~# curl -L registry.deisapp.com
+"docker-registry server (dev)"
+root@deis-controller-t1LHh:~# redis-cli
+redis 127.0.0.1:6379> DEL registry.deisapp.com
+(integer) 1
+redis 127.0.0.1:6379> exit
+root@deis-controller-t1LHh:~# curl -L registry.deisapp.com
+<html>
+<head><title>404 Not Found</title></head>
+<body bgcolor="white">
+<center><h1>404 Not Found</h1></center>
+<hr><center>nginx/1.0.15</center>
+</body>
+</html>
+```
 
 If you intentionally kill deis/cache (the current Redis backend that the router is using),
 then the server returns an HTTP 500 error. We can completely lock down all of Deis'
