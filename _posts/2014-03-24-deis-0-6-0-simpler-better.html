@@ -1,0 +1,72 @@
+---
+layout: post
+title: Deis 0.6.0 - Simpler, Better
+categories: []
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '5'
+author: mboersma
+---
+<p>The Deis project is excited to announce our v0.6.0 release. This version simplifies the project layout to be more developer-friendly, unites two related containers into <em>deis/controller</em>, and standardizes unit testing for Deis' own Docker images.</p>
+<h2>What is Deis?</h2>
+<p>Deis is a Django/Celery API server, Python CLI and set of <a href="https://github.com/opdemand/deis-cookbook">Chef cookbooks</a> that combine to provide a Heroku-inspired application platform for public and private clouds. Your PaaS. Your Rules.</p>
+<h2>0.6.0 Summary</h2>
+<h3>New Features</h3>
+<ul>
+<li>No more submodules: core components are now directly under the opdemand/deis repository</li>
+<li>A new component, <em>deis/controller</em>, runs both the Django REST API server and Celery for long-running tasks</li>
+<li>The deis/tester CI component builds each container and runs <code>make test</code> for unit testing</li>
+<li>CHANGELOG.md added to opdemand/deis and opdemand/deis-cookbook</li>
+</ul>
+<h3>Under the Hood</h3>
+<ul>
+<li>Install pip 1.5.4 in containers to avoid a stale .deb issue</li>
+<li>Pin local Ruby at ~ 2.0.0 for <code>berks upload</code></li>
+</ul>
+<h3>Bug Fixes</h3>
+<ul>
+<li>Fixed dead "Versions" link when generating the docset locally</li>
+<li>Fixed confd wait issue when starting deis/registry</li>
+</ul>
+<h3>Community Shout-Outs</h3>
+<p>Please join us in welcoming @carmstrong to the Deis project! Chris will initially be focused on cleaning up our Chef cookbook and helping streamline the Deis installation process.</p>
+<p>We also want to thank the following Deis community members for creating GitHub issues, providing support to others, and working on various Deis branches:</p>
+<ul>
+<li>@foxycoder - deis-cookbook PR to add NTP client to packages</li>
+<li>@brightbits - deis-cookbook PR for proxy node default response, nginx restart issue, deis layer and proxy issues</li>
+<li>@alexanderkiel - lots of testing, PostgreSQL shutdown and berks install issues</li>
+<li>@rwl4 - testing, registration 500 error issue</li>
+</ul>
+<h2>Known Issues</h2>
+<h3>Proxy for Platform Services</h3>
+<p>As part of moving Deis into Docker containers, we had to change the exposed ports for some core platform services. For example, the Django API server is now exposed on 8000/tcp rather than 80/tcp. We will soon distribute a <a href="https://github.com/opdemand/deis/issues/535">new proxy service</a> that exposes the platform components on standard ports.</p>
+<h3>Container Timeouts</h3>
+<p>We have seen some issues with timeouts due to the public Docker Index. This can manifest as timeout errors when bootstrapping nodes. Typically re-running the provisioning operations will resolve the issue. We are working with the Docker team on a more robust resolution.</p>
+<h2>What's Next?</h2>
+<h3>Docker Run Deis</h3>
+<p>Making Deis easier to install is one of our primary goals, and one of the driving forces behind our decision to containerize all the Deis components. Running Deis should be as easy as <code>docker run deis/deis</code>. We have a working prototype today. However, this will require some careful project restructuring on GitHub.</p>
+<h3>Enterprise-Grade Scheduler</h3>
+<p>We are now prototyping new schedulers based on <a href="https://mesos.apache.org/">Apache Mesos</a> and <a href="https://coreos.com/">CoreOS</a>. This should dramatically simplify the Deis controller and allow Deis clusters to scale to 10,000+ nodes.</p>
+<h3>Promote artifacts from Docker Registry</h3>
+<p>In order to facilitate a streamlined CI/CD process, we need an ability to promote existing Docker images as builds (bypassing the <code>git push</code> process). We are currently investigating the best workflow.</p>
+<h3>SSL &amp; General Security Improvements</h3>
+<p>For more details, <a href="https://github.com/opdemand/deis/issues?labels=security&amp;state=open">see issues tagged security</a> on GitHub.</p>
+<h2>Future</h2>
+<h3>Remove the Chef Dependency</h3>
+<p>Though Chef will continue to be the recommended way to deploy Deis, we are moving away from requiring a Chef Server and using Data Bags for cluster configuration. Once we implement the new scheduler, we can remove the Chef dependency and provide support for other configuration management solutions (Puppet, Ansible, Salt).</p>
+<h3>Service Gateway</h3>
+<p>We need to make it as easy for ops folks to publish a set of reusable backing services (databases, queues, storage, etc) and allow developers to attach those services to applications. This will be done in a loosely coupled way, following Twelve Factor best practices. You can review the initial implementation and follow progress <a href="https://github.com/opdemand/deis/issues/231">on this GitHub issue</a>.</p>
+<h3>Interactive <code>deis run</code></h3>
+<p>Though we provide the ability to run admin commands inside containers, we don't currently support interactive shells into containers (i.e. <code>deis run bash</code>). Once this infrastructure is in place, this will also allow us to implement log tailing and other real-time features.</p>
+<h3>Support for <code>deis push</code> deploys</h3>
+<p>Users should be able to push builds to Deis even if they don't use <code>git</code>. We are investigating a <code>deis push</code> command that would not require a specific VCS.</p>
+<h2>How can you help?</h2>
+<ul>
+<li>Star our <a href="https://github.com/opdemand/deis">GitHub repository</a></li>
+<li>Help spread the word about <a href="http://twitter.com/opendeis">@opendeis</a> on Twitter</li>
+<li>Explore contributing to the Deis project by joining the #deis channel on Freenode</li>
+</ul>
+<p>You can learn about other ways to <a href="http://deis.io/get-involved/">get involved</a> on our website.</p>

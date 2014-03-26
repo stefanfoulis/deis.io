@@ -1,0 +1,79 @@
+---
+layout: post
+title: Command Line Bliss with Docopt
+categories: []
+tags:
+- cli
+- developer
+- docopt
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '3'
+  _aioseop_keywords: docopt, deis, cli, command line
+  _aioseop_description: Docopt transforms conventional usage text into a formal parser
+    for command-line arguments, representing a fresh approach to command-line parsing.
+  _aioseop_title: Command Line Bliss with Docopt
+author: mboersma
+---
+<p>Starting to write the command-line client for the <a href="https://github.com/opdemand/deis">Deis</a> open source PaaS, I was intimidated. I've written many command-line tools, most of them in Python, but the Deis CLI is more of a "swiss army knife" than I had attempted with <a href="http://docs.python.org/2/library/argparse.html">argparse</a>:</p>
+<pre>&lt;code&gt;$ deis register http://ec2-198-51-100-36.us-west-2.compute.amazonaws.com
+$ deis create --flavor=ec2-eu-west-1
+$ deis containers:scale web=4 worker=2
+$ deis layers:create redis ec2-eu-west-1 --ssh_username=deisuser
+$ deis help releases
+Valid commands for releases:
+
+releases:list        list a formation&#039;s release history
+releases:info        print information about a specific release
+releases:rollback    coming soon!
+
+Use `deis help [command]` to learn more
+&lt;/code&gt;</pre>
+<h2>Enter docopt</h2>
+<p><a href="http://docopt.org/">Docopt</a> transforms conventional <em>Usage</em> text into a formal parser for command-line arguments. Simple as that. For many command- line tools, simply declaring a single <em>Usage</em> string and having docopt parse it can handle everything:</p>
+<pre>&lt;code&gt;&quot;&quot;&quot;Naval Fate.
+
+Usage:
+  naval_fate.py ship new &amp;lt;name&amp;gt;...
+  naval_fate.py ship &amp;lt;name&amp;gt; move &amp;lt;x&amp;gt; &amp;lt;y&amp;gt; [--speed=&amp;lt;kn&amp;gt;]
+  naval_fate.py mine (set|remove) &amp;lt;x&amp;gt; &amp;lt;y&amp;gt; [--moored | --drifting]
+  naval_fate.py (-h | --help)
+
+Options:
+  -h --help     Show this screen.
+  --speed=&amp;lt;kn&amp;gt;  Speed in knots [default: 10].
+  --moored      Moored (anchored) mine.
+  --drifting    Drifting mine.
+
+&quot;&quot;&quot;
+from docopt import docopt
+
+
+if __name__ == &#039;__main__&#039;:
+    arguments = docopt(__doc__, version=&#039;Naval Fate 2.0&#039;)
+    print(arguments)
+&lt;/code&gt;</pre>
+<p>This example Python program will now enforce the command line arguments given in the module's triple-quoted docstring. Arguments are returned as a simple dict, not a custom object. There is no further abstraction, just the declaration of intent.</p>
+<h2>Double down</h2>
+<p>Using docopt in this straightforward way covered nearly all our requirements for the Deis client, except for colon-separated "compound" commands that we wanted to phrase this way:</p>
+<pre>&lt;code&gt;$ deis flavors:delete ec2-eu-west-1
+$ deis nodes:list
+&lt;/code&gt;</pre>
+<p>Here's the strategy <a href="https://twitter.com/gabrtv">@gabrtv</a> came up with:</p>
+<ul>
+<li>parse the command line using the module docstring</li>
+<li>transform colons to underscores and expand shortcuts to full commands ("logout" is really "auth:logout," for example)</li>
+<li>find a client method with the same name as the command</li>
+<li>re-parse the command line using the method's docstring</li>
+<li>call the method with the resulting arguments</li>
+</ul>
+<p>Deis' approach here has several advantages:</p>
+<ul>
+<li>Command syntax <em>is</em> the docstring for the relevant method, so there's no mismatch and no searching for definitions</li>
+<li>Minimal coding required</li>
+<li>With a bit of care, the same docstrings work well as readable documentation for a tool such as Sphinx</li>
+</ul>
+<p>Docopt is a fresh approach to command-line parsing that immediately made us wonder why no one had thought of this before. We use Python, but there are implementations of docopt available for Ruby, JavaScript, and PHP.</p>
+<p>Have a look at the <a href="https://github.com/opdemand/deis/blob/master/client/deis.py">single python file</a> that implements the Deis client. I'm not sure how it could be more terse and self-documenting. You may find <a href="http://docopt.org/">docopt</a> a good fit for writing your next command-line tool.</p>

@@ -1,0 +1,71 @@
+---
+layout: post
+title: Deis 0.0.7 - Bug Squash & Docker 0.6.1
+categories: []
+tags:
+- Docs
+- Release
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '5'
+  _aioseop_description: The Deis project is happy to announce v0.0.7 which is primarily
+    a bug fix release. We look forward to the next round of feature dev as we push
+    toward our 0.1.0.
+  _aioseop_title: Deis 0.0.7 Release - Bug Squash & Docker 0.6.1
+author: gabrtv
+---
+<p>The Deis project is happy to announce v0.0.7 which is primarily a bug fix release. We look forward to the next round of feature development as we push toward our 0.1.0.</p>
+<h2>What is Deis?</h2>
+<p>Deis is a Django/Celery API server, Python CLI and set of <a href="https://github.com/opdemand/deis-cookbook">Chef cookbooks</a> that combine to provide a Heroku-inspired application platform for public and private clouds. Your PaaS. Your Rules.</p>
+<h2>0.0.7 Summary</h2>
+<h4>Bug Fixes</h4>
+<ul>
+<li>Fixed stacktrace when user had no SSH keys</li>
+<li>Fix intermittent EC2 SSH timeout resulting in 404 on scale command</li>
+<li>Fix stacktrace and 500 error when no credentials provided</li>
+<li>Fix git-push error due to duplicate SSH keys being allowed on server</li>
+<li>Fix 404 error on 500 error due to missing Nginx HTML template</li>
+<li>Fix Chef error due to malformed proxy data bag</li>
+<li>Fix Chef warnings due to duplicate resource name for gitosis bare repo</li>
+</ul>
+<h4>New Features</h4>
+<ul>
+<li>Update to Docker 0.6.1</li>
+</ul>
+<h4>Other Changes</h4>
+<ul>
+<li>Make flavor parameters explicit and updateable so users can change AMI ID, Instance Size</li>
+<li>Add checks for Deis dependencies to PaaS controller provisioning script</li>
+<li>Retry Chef API calls to work around intermittent Hosted Chef 500 errors</li>
+<li>Update public EC2 AMIs to include latest security packages and components (e.g. Buildstep)</li>
+</ul>
+<h2>What's Next?</h2>
+<p>Much of the list below has been rolled over from 0.0.6. Now that we have these important bug fixes behind us, we can move forward with some necessary refactoring and the development of important new features requested by the community.</p>
+<h3>Backwards Incompatible Changes</h3>
+<p>There are a few backwards incompatible changes we need to get behind us. Firstly, we need to allow <a href="https://github.com/opdemand/deis/issues/120">multiple applications to be hosted on a single formation</a> with a single set of proxy and runtime nodes. This will allow Deis to meet the needs of software teams looking to cheaply host multiple dev/test applications using Docker. Secondly, we need to support <a href="https://github.com/opdemand/deis/issues/52">layers that serve as both proxy and runtime</a> to minimize node usage for small deployments and ultimately allow for cross-provider formations. We've made lots of progress on this front already.</p>
+<h3>Rackspace &amp; Digital Ocean Providers</h3>
+<p>We've had many <a href="https://github.com/opdemand/deis/issues/73">requests for a Digital Ocean provider</a>. We are also interested in building an OpenStack-based provider for Deis. That means Rackspace and Digital Ocean will be our next supported providers. We will be using a TDD approach to help formalize the process for implementing a new provider. This is well on its way.</p>
+<h3>Acceptance Test Automation</h3>
+<p>Deis has many moving parts. In order to ensure quality from release to release we are building an end-to-end test framework based on <a href="https://pypi.python.org/pypi/pexpect/">pexpect</a>. The test automation will include creating formations, scaling layers, deploying applications, scaling containers and more. The automation test will be available in the repository for anyone to run. See the acceptance test branch for the latest on this.</p>
+<h3>Enhanced Docker Integration</h3>
+<p>Deis currently uses Docker as a LXC wrapper for running Buildpack slugs that are bind-mounted into <a href="https://github.com/opdemand/buildstep">Buildstep</a> images. As soon as the Docker Private Registry code stabilizes, we will be adding a new <code>git push</code> build process that creates and distributes images via <code>Dockerfile</code> and a private registry hosted on the controller. We will also allow builds to reference any existing Docker image by a fully qualified image URI.</p>
+<h3>SSL Support</h3>
+<p>Both the controller and formation proxies require SSL configuration. Right now controller sessions are just HTTP with cookies and passwords sent in the clear! Before we tackle formation SSL, we need the backwards incompatible changes to applications and proxies to land in master.</p>
+<h3>General Security Improvements</h3>
+<p>We've glossed over some pretty important security features in an effort to get Deis into developers hands sooner rather than later. For example, we need to implement iptables host-level firewalls, improve security group default rules, use Chef recipes to harden systems, etc. If you find any other security holes, please open a GitHub issue and tag it "Security".</p>
+<h2>Future</h2>
+<h3>Team Support</h3>
+<p>As of now, only a single user can control or push to a formation. We need to add simple sharing features, which we can then expand upon using finer-grained access controls.</p>
+<h3>Health Checks</h3>
+<p>We do not currently monitor nodes or container health -- though we have infrastructure in place to do it.</p>
+<h3>Service Discovery</h3>
+<p>We need to make it as easy for ops folks to publish a set of reusable backing services (databases, queues, storage, etc) and allow developers to attach those services to applications. This will be done in a loosely coupled way, following Twelve Factor best practices.</p>
+<h2>How can you help?</h2>
+<ul>
+<li>Star our <a href="https://github.com/opdemand/deis">GitHub repository</a></li>
+<li>Help spread the word about <a href="http://twitter.com/opendeis">@opendeis</a> on Twitter</li>
+<li>Explore contributing to the Deis project by joining the #deis channel on Freenode</li>
+</ul>
+<p>You can learn about other ways to <a href="http://deis.io/get-involved/">get involved</a> on our website.</p>

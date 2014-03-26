@@ -1,0 +1,74 @@
+---
+layout: post
+title: Deis 0.1.1 - Rackspace Preview, Bug Fixes
+categories: []
+tags:
+- Docs
+- Release
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '4'
+  _aioseop_keywords: deis, heroku, docker, aws, rackspace
+  _aioseop_description: The Deis project is excited to announce our v0.1.1 release.
+    We've added support for Rackspace Cloud and fixed many issues found by the Deis
+    community.
+author: mboersma
+---
+<p>The Deis project is excited to announce our v0.1.1 release. We've added support for Rackspace Cloud and fixed many issues found by the Deis community.</p>
+<h2>What is Deis?</h2>
+<p>Deis is a Django/Celery API server, Python CLI and set of <a href="https://github.com/opdemand/deis-cookbook">Chef cookbooks</a> that combine to provide a Heroku-inspired application platform for public and private clouds. Your PaaS. Your Rules.</p>
+<h2>0.1.1 Summary</h2>
+<h3>New Features</h3>
+<ul>
+<li>Rackspace Cloud provider preview (lacks some documentation)</li>
+<li>Formation flavors can be updated from the command-line</li>
+</ul>
+<h3>Under the Hood</h3>
+<ul>
+<li>Updated to Docker 0.6.4</li>
+<li>Updated buildstep to latest from upstream progrium/buildstep</li>
+<li>Updated some Ruby and Chef libraries</li>
+<li>Updated EC2 AMIs for faster provisioning</li>
+</ul>
+<h3>Bug Fixes</h3>
+<ul>
+<li>Updated python gevent to address a DNS bug</li>
+<li>Fixed run commands executing against proxy nodes</li>
+<li>Fixed CLI scaling error message when no Rackspace image exists</li>
+<li>Fixed 502 "Bad Gateway" errors on controller converge</li>
+<li>Fixed double converge on new release</li>
+<li>Fixed handling of <code>git push deis mater</code> (non-existent repo ref)</li>
+<li>Sitemap, Bing, ReadTheDocs.org documentation fixes</li>
+</ul>
+<h3>Community Shout-Outs</h3>
+<p>We want to thank the following Deis community members for creating GitHub issues, providing support to others, and working on various Deis branches:</p>
+<ul>
+<li>@bacongobbler - while his DigitalOcean support sits just shy of the finish line, awaiting Docker 0.7, he has helped immensely by answering questions on IRC and providing suggestions and comments on several GitHub issues.</li>
+<li>@progrium and asm89 on IRC - Deis wouldn't be here without buildstep, and we appreciate greatly the support we've gotten and the pull requests they've accepted.</li>
+<li>Jesse Noller and the Rackers - <a href="http://www.rackspace.com/">Rackspace</a> has been outstanding in helping us implement first-class support for their Open Cloud, although their pyrax library already made it straightforward.</li>
+<li>@enyachoke, @tombh, @bacongobbler - Request, discussion, and code about a Vagrant provider implementation.</li>
+</ul>
+<h2>What's Next?</h2>
+<ol>
+<li><strong><em>Rackspace documentation</em></strong>. There is the beginning of documentation in the contrib/rackspace/README.md file, and intrepid users can certainly figure out how to provision a Rackspace controller, but we need to rework the install documentation so it treats EC2 and Rackspace (and others) as equal citizens.</li>
+<li><strong><em>Vagrant provider</em></strong>. Allowing Deis to run on a completely local "cloud" will enable developers to test and improve Deis without incurring any provider charges. We have this working in a "static" node formation currently, but there are a couple details remaining to fix, and it needs documentation. @tombh has done some solid work on a full provider implementation for Vagrant as well.</li>
+<li><strong><em>Team Support / Sharing</em></strong>. The mechanisms for sharing Formations and Apps are already implemented in a branch; we need to write more tests, implement some access control endpoints and make some changes to the gitosis data bag.</li>
+</ol>
+<h2>Future</h2>
+<h3>Enhanced Docker Integration</h3>
+<p>Deis currently uses Docker as a LXC wrapper for running Heroku Buildpack slugs that are bind-mounted into <a href="https://github.com/opdemand/buildstep">Buildstep</a> images. As soon as the Docker Private Registry code stabilizes, we will be adding a new <code>git push</code> build process that creates and distributes images via <code>Dockerfile</code> and a private registry hosted on the controller.</p>
+<h3>General Security Improvements</h3>
+<p>Both the controller and formation proxies require SSL configuration. Right now controller sessions are just HTTP with cookies and passwords sent in the clear! We've also glossed over some pretty important security features in an effort to get Deis into developers hands. For example, we need to implement iptables host-level firewalls, improve security group default rules, use Chef recipes to harden systems, etc. If you find any other security holes, please <a href="https://github.com/opdemand/deis/issues">open a GitHub issue</a> and tag it "Security".</p>
+<h3>Health Checks</h3>
+<p>We do not currently monitor nodes or container health -- though we have infrastructure in place to do it.</p>
+<h3>Service Registry</h3>
+<p>We need to make it as easy for ops folks to publish a set of reusable backing services (databases, queues, storage, etc) and allow developers to attach those services to applications. This will be done in a loosely coupled way, following Twelve Factor best practices.</p>
+<h2>How can you help?</h2>
+<ul>
+<li>Star our <a href="https://github.com/opdemand/deis">GitHub repository</a></li>
+<li>Help spread the word about <a href="http://twitter.com/opendeis">@opendeis</a> on Twitter</li>
+<li>Explore contributing to the Deis project by joining the #deis channel on Freenode</li>
+</ul>
+<p>You can learn about other ways to <a href="http://deis.io/get-involved/">get involved</a> on our website.</p>

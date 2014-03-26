@@ -1,0 +1,75 @@
+---
+layout: post
+title: Deis 0.4.0 - Rollback and Auditing
+categories: []
+tags:
+- Docs
+- Release
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '5'
+  _aioseop_description: This version adds better logging, more detailed release summaries,
+    and the ability to roll back to a previous release.
+author: mboersma
+---
+<p>The Deis project is glad to announce our v0.4.0 release. This version adds better logging, more detailed release summaries, and the ability to roll back to a previous release.</p>
+<h2>What is Deis?</h2>
+<p>Deis is a Django/Celery API server, Python CLI and set of <a href="https://github.com/opdemand/deis-cookbook">Chef cookbooks</a> that combine to provide a Heroku-inspired application platform for public and private clouds.  Your PaaS. Your Rules.</p>
+<h2>0.4.0 Summary</h2>
+<h3>New Features</h3>
+<ul>
+<li><code>deis logs</code> now includes app lifecycle events</li>
+<li><code>deis rollback</code> creates a new release from a previous build and config</li>
+<li><code>deis releases</code> summarizes what changed in each release and when</li>
+<li>Rackspace provider uses new, fast "performance" flavors</li>
+<li>Added "customizing buildpacks" to FAQ</li>
+</ul>
+<h3>Under the Hood</h3>
+<ul>
+<li>Updated to Docker 0.7.5</li>
+<li>Added a "Push" domain object en route to decoupling SSH/Git from controller</li>
+<li>Updated boto, paramiko, psycopg2, and requests Python libs</li>
+<li>Moved slugbuilder hook to deis repo from deis-cookbook</li>
+</ul>
+<h3>Bug Fixes</h3>
+<ul>
+<li>Fixed <code>deis config</code> always returning latest, not necessarily current</li>
+<li>Fixed <code>deis releases:info v1</code> ignoring optional version argument</li>
+<li>Added "prepare new image" instruction and other improvements to Rackspace docs</li>
+<li>Improvements to contrib/vagrant/README.md</li>
+<li>Return better error message in client on ConnectionError</li>
+</ul>
+<h3>Community Shout-Outs</h3>
+<p>We want to thank the following Deis community members for creating GitHub issues, providing support to others, and working on various Deis branches:</p>
+<ul>
+<li>@stackedsax - Rackspace doc and code improvements, lots of great feedback</li>
+<li>@joelvh - Fixed a typo</li>
+<li>@ksikka - Testing, several GitHub issues, tons of great feedback</li>
+<li>@tombh - Moved slugbuilder hook, CLI connection err message fix, vagrant doc improvements, much more help and support...and the amazing http://danabox.io</li>
+<li>@bacongobbler - Alpha of service discovery for Deis, major user support on IRC and GitHub</li>
+</ul>
+<h2>What's Next?</h2>
+<ol>
+<li>
+<p><strong><em>Containerization of Deis Components</em></strong>.  Converting all the Deis components to Docker images is nearing completion in the <em>containerize</em> branch. This will result in a more modular system that's easier to deploy and manage.</p>
+</li>
+<li>
+<p><strong><em>Interactive <code>deis run</code></em></strong> Though we provide the ability to run admin commands inside containers, we don't currently support interactive shells into containers.  We will soon.</p>
+</li>
+</ol>
+<h2>Future</h2>
+<h3>Enhanced Docker Integration</h3>
+<p>Deis currently uses Docker as a LXC wrapper for running Heroku Buildpack slugs that are bind-mounted into containers.  We will sonn add a new <code>git push</code> build process that creates and distributes images via <code>Dockerfile</code> and a private Docker registry.  Follow progress <a href="https://github.com/opdemand/deis/issues/152">on this GitHub issue</a>.</p>
+<h3>Service Registry</h3>
+<p>We need to make it as easy for ops folks to publish a set of reusable backing services (databases, queues, storage, etc) and allow developers to attach those services to applications.  This will be done in a loosely coupled way, following Twelve Factor best practices.  You can review the specification and follow progress <a href="https://github.com/opdemand/deis/issues/231">on this GitHub issue</a>.</p>
+<h3>General Security Improvements</h3>
+<p>The controllers require <a href="https://github.com/opdemand/deis/issues/18">SSL configuration</a>.  Right now controller sessions are just HTTP with cookies and passwords sent in the clear!  We've also glossed over some pretty important security features in an effort to get Deis into developers hands.  For example, we need to implement iptables host-level firewalls, improve security group default rules, use Chef recipes to <a href="https://github.com/opdemand/deis/issues/27">harden systems</a>, etc.</p>
+<h2>How can you help?</h2>
+<ul>
+<li>Star our <a href="https://github.com/opdemand/deis">GitHub repository</a></li>
+<li>Help spread the word about <a href="http://twitter.com/opendeis">@opendeis</a> on Twitter</li>
+<li>Explore contributing to the Deis project by joining the #deis channel on Freenode</li>
+</ul>
+<p>You can learn about other ways to <a href="http://deis.io/get-involved/">get involved</a> on our website.</p>

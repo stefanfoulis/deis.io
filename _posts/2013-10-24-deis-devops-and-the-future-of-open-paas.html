@@ -1,0 +1,43 @@
+---
+layout: post
+title: Deis, DevOps and the Future of Open PaaS
+categories: []
+tags:
+- Chef
+- DevOps
+- Docker
+- Heroku
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '5'
+  _aioseop_description: Deis combines Docker's Linux container engine with Chef’s
+    trusted infrastructure automation, creating an open source application platform
+    that runs anywhere.
+author: gabrtv
+---
+<p>These are exciting times in web and mobile development. Innovations in deployment automation and infrastructure orchestration are coming hard and fast with no sign of slowing. You might say there's never been a better time to be a developer.</p>
+<p>Those of us focused on making developers’ lives easier have gravitated toward the "Platform as a Service" model. It turns out you can keep developers happy and productive by providing them an application platform (PaaS) that neatly decouples their applications from the operating system.</p>
+<p>Today, most automation-minded organizations are still investing in and succeeding with server-based application deployment. However, now that <a href="http://linuxcontainers.org/">LXC</a> has begun to demonstrate security and efficiency gains reminiscent of modern virtualization, the era of Open PaaS is here.</p>
+<p><a href="http://heroku.com/">Heroku</a> and <a href="https://developers.google.com/appengine/">Google App Engine</a> have proven that application platforms based on Linux Containers can scale. Now the race is on to create open source alternatives that provide this application platform capability inside the enterprise.</p>
+<h2>DevOps vs. NoOps</h2>
+<p>The "<a href="http://www.pcworld.com/article/252264/noops_debate_grows_heated.html">NoOps</a>" movement presumes operations teams will be made obsolete by highly automated application platforms. Hosted PaaS solutions nearly eliminate the need for DevOps skill-sets, lending credence to NoOps. However, the reality is today's public application platforms can be shockingly expensive for even moderate workloads. Worse yet, the very abstractions they promote are often exactly what frustrate sophisticated teams.</p>
+<p>These frustrations eventually lead to a search for a "private Heroku" or "private App Engine" that offers the same benefits for developers, but without the loss of operational control.</p>
+<p>Unfortunately, the Open PaaS solutions available today (Cloud Foundry and OpenShift) introduce wholly new paradigms and components that, while ostensibly open source, are in practice difficult to install, operate and customize. This presents an opportunity for an open source application platform that can bridge the gap between the DevOps tool chains trusted by today’s sophisticated ops team and our containerized future. Deis is that platform.</p>
+<h2>Introducing Deis</h2>
+<p>Deis combines <a href="http://docker.io/">Docker's Linux container engine</a> with <a href="http://opscode.com/">Chef’s trusted infrastructure automation</a>, creating an open source application platform that runs on public cloud, private cloud and bare metal. By building upon Chef, which is widely deployed and <a href="http://www.opscode.com/blog/chefconf-talks/chefconf-2013-scaling-systems-configuration-at-facebook-the-paradigms-design-and-software-behind-managing-massive-numbers-of-systems-with-open-source-and-small-teams-phil-dibowitz/">proven to work at scale</a>, Deis provides a "private Heroku" experience that delights both developers and operations engineers.</p>
+<h2>The Power of Docker</h2>
+<p>Having been involved with the Docker community since their inception, we've had a front-row seat to their meteoric rise and have great respect for the team and technology. Docker is one of those rare innovations that seem so obvious in retrospect. Portable application containers based on LXC, file system de-duplication and tooling to automate building, distributing and executing containers. Obviously! The trick is in making these "standard containers" ubiquitous.</p>
+<p>While the full promise of Docker has yet to be realized, the team’s ability to capture open source momentum toward Linux containers is impressive. The project is approaching 200 external contributors, featuring some large contributions including how Docker <a href="https://github.com/dotcloud/docker/pull/602">interacts with host volumes</a> and Docker's <a href="https://github.com/dotcloud/docker/issues/172">file system layering technology</a>. This ability to harness open source momentum is what makes us believe Docker will succeed in its mission to standardize application containers across the modern datacenter. As a leading Docker PaaS, Deis will continue to play a role in this effort.</p>
+<h2>Evolution Toward Chef Server</h2>
+<p>Prior to Deis, the OpDemand team wrote a lot of Puppet. We watched as the industry began moving toward Chef, with RightScale and AWS OpsWorks demonstrating support. Chef was quick to develop a thriving DevOps community that produced hundreds of <a href="http://community.opscode.com/cookbooks">high quality cookbooks</a> and a first-class tool chain (<a href="http://docs.opscode.com/knife.html">knife</a>, <a href="http://berkshelf.com/">berkshelf</a>). We decided to try it.</p>
+<p>It wasn’t until we built Deis that we fully appreciated the flexibility of Chef's <a href="http://docs.opscode.com/chef/dsl_recipe.html">Ruby DSL</a>, the determinism of explicitly ordered resources (in contrast with Puppet’s frustratingly indirect <a href="http://docs.puppetlabs.com/learning/ral.html">RAL</a>) and the reliability of Chef <a href="http://docs.opscode.com/essentials_data_bags.html">Data Bags</a> as a global store for PaaS configuration. Without a Chef Server, Deis becomes significantly more complicated and brittle.</p>
+<p>If someone can demonstrate a faster, more reliable, and more flexible approach to configuration management than Chef Server, the Deis project is open to it. Deis sports a pluggable configuration management interface, and we will gladly accept a well-designed pull request. For now, Deis is happy to be part of the healthy Chef ecosystem.</p>
+<h2>Heroku Inspired</h2>
+<p>When looking for inspiration in the world of PaaS, you can't ignore Heroku. The command line workflow they've pioneered is second to none. By treating the developer community as artists, they've managed to build a loyal following – one we got to see up close at their <a href="https://waza.heroku.com/2013">Waza conference</a> earlier this year. If your goal is to delight developers, emulating Heroku is a great place to start.</p>
+<p>While Deis was designed with Heroku's <a href="http://12factor.net/">Twelve Factor methodology</a> and command line workflow in mind, Heroku has very little to say about the guts of the application platform and runtime. This is where Deis and Heroku diverge. Deis introduces the concepts of <a href="http://docs.deis.io/en/latest/gettingstarted/concepts/">Formations, Layers, and Nodes</a> to help operations teams deploy a private application fabric built to their own specifications using Chef and Docker.</p>
+<p>Although we disagree with their NoOps stance, Deis will continue to take inspiration from Heroku as we strive to become the best Open PaaS on the market.</p>
+<h2>Future of Deis</h2>
+<p>Deis has only been available for two months. The open source community's reaction has been exciting and humbling. We have a lot of work to do on the installation process, backing services, system hardening, access controls, load testing and more before we can make our claim as the enterprise-grade "private Heroku" – but we're damn close. With the help and support of the open source community, we expect to announce our 1.0 release in a few months. Until then, expect a steady stream of releases featuring bug fixes, new cloud providers, enhanced Docker integration and much more.</p>
+<p>If you're interested in learning more about Deis or contributing to the project, come find us in IRC (#deis on Freenode) and check out <a href="https://github.com/opdemand/deis">the project on GitHub</a>.</p>
