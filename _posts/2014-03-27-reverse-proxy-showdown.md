@@ -103,96 +103,28 @@ set, simple configuration, and low resource consumption. Nginx also powers sever
 high-visibility sites, such as Netflix, Hulu, Pinterest, CloudFlare, GitHub, Heroku,
 RightScale, Engine Yard and MaxCDN, to name a few. It has proxy support for SSL, TCP,
 and websockets, which passes our initial tests with flying colours. It even has
-[dynamic configuration][dyn-config-nginx] through a Lua extension! Nginx is also
-documented out the wazoo, which is another huge plus.
+[dynamic configuration][1] through a Lua extension! Nginx is also documented out the
+wazoo, which is another huge plus.
 
 One interesting point about Nginx is that it does not rely on threads to handle requests
 (I'm looking at you, Apache). Inbound requests are handled through an event-driven
-architecture, allowing it to scale and solve the [C10K problem][c10k]. This architecture
+architecture, allowing it to scale and solve the [C10K problem][2]. This architecture
 is ridiculously scalable due to the low memory footprint and event-driven triggers to
 handle anything from a small blog post (like this one!) to CloudFlare's gargantuan
 Content Delivery Network.
 
-## Proof of Concept
+There's also a bundled version of nginx called openresty. openresty is a full-fledged web
+application server by bundling the standard nginx core, lots of 3rd-party nginx modules,
+as well as most of their external dependencies. It makes dependency management for
+third party modules a lot easier than bundling it yourself.
 
-Because no other proxy supported the big three (HTTP, SSL, and TCP) all at once, nginx
-wins by default! In order to come up with a proof of concept to see if nginx would work
-in our environment, I built a containerized version of the router, which is available
-to view [here](https://github.com/opdemand/deis/commit/660af5d9a02aa3b1ef26aaa66b00dfdd08114201).
-Let's break down the component:
+## To be Continued
 
-### Dockerfile
+Our next blog post will look into the different proxies presented to us, as well as a
+proof of concept that is containerized using Docker, dynamic configuration from [etcd][3],
+and advanced templating features from [confd][4].
 
-The Dockerfile does one thing and one thing only: build nginx with TCP, Lua, and Redis
-support. To do that, we compile nginx from source with Lua already installed into the
-image, patch TCP proxy support, and add a lua library to connect to Redis.
-
-### Confd
-
-[confd](https://github.com/kelseyhightower/confd) is a new and exciting project based on
-two things that we have fallen in love with over here: etcd and Go. confd is a lightweight
-configuration management tool that allows you to template any file and update those
-templates on the fly, based on certain changes in any of the etcd keys your template
-relies on. In this example, we want to template our nginx configuration file so that users
-can dynamically change the connection string to our Redis backend at any point. When you
-change the key's value in etcd, the value in nginx.conf is changed the next time it
-synchronizes with confd, which is about every 5 seconds. It's pretty powerful stuff.
-
-### Lua/Redis Dynamic Configuration
-
-This little gem really knocked really blew me out of the water. The knowledge all comes
-from [this blog post][dyn-config-redis], so the thanks goes out to Dan Sosedoff. This
-powerful snippet allows us to dynamically set and unset nginx upstreams with zero
-downtime, allowing us to change values in Redis freely without interruption to existing
-connections or without any hiccups in new connections. In fact, it's so fast that the
-request/response time hardly feels anything due to how blazingly fast Redis works! For
-now, it's just a proof of concept, but we can do some pretty cool stuff with it:
-
-```bash
-$ dig registry.deisapp.com
-[...]
-;; ANSWER SECTION:
-registry.deisapp.com. 1649 IN  A   107.170.227.113
-$ dig deisapp.com
-[...]
-;; ANSWER SECTION:
-deisapp.com.   1800    IN  A   107.170.227.113
-$ ssh -i ~/.ssh/deis-controller root@deisapp.com
-root@deis-controller-t1LHh:~# redis-cli
-redis 127.0.0.1:6379> KEYS *
-1) "deisapp.com"
-2) "registry.deisapp.com"
-redis 127.0.0.1:6379> GET registry.deisapp.com
-"107.170.227.113:5000"
-redis 127.0.0.1:6379> exit
-root@deis-controller-t1LHh:~# curl -L registry.deisapp.com
-"docker-registry server (dev)"
-root@deis-controller-t1LHh:~# redis-cli
-redis 127.0.0.1:6379> DEL registry.deisapp.com
-(integer) 1
-redis 127.0.0.1:6379> exit
-root@deis-controller-t1LHh:~# curl -L registry.deisapp.com
-<html>
-<head><title>404 Not Found</title></head>
-<body bgcolor="white">
-<center><h1>404 Not Found</h1></center>
-<hr><center>nginx/1.0.15</center>
-</body>
-</html>
-```
-
-If you intentionally kill deis/cache (the current Redis backend that the router is using),
-then the server returns an HTTP 500 error. We can completely lock down all of Deis'
-components and just have a couple entries in Redis to route to those components through
-nginx.  As a proof of concept, it seems to work pretty well, and we're really excited with
-what we can do with this new component.
-
-## Conclusion
-
-After comparing the three, we came down to only Nginx as a solution for our needs. While
-HAProxy and Hipache are stable, it does not have SSL support, which is a non-starter.
-Strowger is not yet ready for production, and we need a product that works now. Nginx wins
-by default!
-
-[c10k]: http://www.kegel.com/c10k.html
-[dyn-config-redis]: http://sosedoff.com/2012/06/11/dynamic-nginx-upstreams-with-lua-and-redis.html
+[1]: http://sosedoff.com/2012/06/11/dynamic-nginx-upstreams-with-lua-and-redis.html
+[2]: http://www.kegel.com/c10k.html
+[3]: https://github.com/coreos/etcd
+[4]: https://github.com/kelseyhightower/confd
