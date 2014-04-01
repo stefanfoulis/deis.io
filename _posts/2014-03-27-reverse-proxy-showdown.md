@@ -118,11 +118,10 @@ application server by bundling the standard nginx core, lots of 3rd-party nginx 
 as well as most of their external dependencies. It makes dependency management for
 third party modules a lot easier than bundling it yourself.
 
-## To be Continued
+## To be Continued...
 
-Our next blog post will look into the different proxies presented to us, as well as a
-proof of concept that is containerized using Docker, dynamic configuration from [etcd][3],
-and advanced templating features from [confd][4].
+Our next blog post will look into a proof of concept that is containerized using Docker,
+dynamic configuration from [etcd][3], and advanced templating features from [confd][4].
 
 [1]: http://sosedoff.com/2012/06/11/dynamic-nginx-upstreams-with-lua-and-redis.html
 [2]: http://www.kegel.com/c10k.html
