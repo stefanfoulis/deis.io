@@ -7,24 +7,24 @@ footer{display:none;width:201px}.testClass{padding:0;margin:0}h1,h2,h3,h4,h5,h6{
 
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
-	.main-fork {
-			left:1067px !important;
-	}
+    .main-fork {
+            left:1067px !important;
+    }
 
-	.cover-image {
-		width:491px !important;
-		padding-left:0 !important;
-	}
+    .cover-image {
+        width:491px !important;
+        padding-left:0 !important;
+    }
 }
 
 /* Landscape phones and down */
 @media (max-width: 480px) {
-	.main-fork {
-		left:1067px !important;
-	}
+    .main-fork {
+        left:1067px !important;
+    }
 
-	.cover-image {
-		width:491px !important;
-		padding-left:0 !important;
-	}
+    .cover-image {
+        width:491px !important;
+        padding-left:0 !important;
+    }
 }

@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="Deis, open source, application platform, chef, docker, buildpacks, private paas, paas" />
+    {% for metatag in page.meta %}<meta name="{{ metatag.name }}" content="{{ metatag.content }}" />
+    {% endfor %}
     <!-- Twitter Bootstrap -->
     <link rel="stylesheet" href="/assets/css/bootstrap.css">
     <link rel="stylesheet" href="/assets/css/bootstrap-responsive.css">
