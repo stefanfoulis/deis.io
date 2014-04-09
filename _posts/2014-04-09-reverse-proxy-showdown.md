@@ -1,9 +1,12 @@
 ---
 layout: post
 title:  Reverse Proxy Showdown
-date:   2014-03-27
 author: bacongobbler
-tags:   proxy nginx lighttpd pound hipache strowger comparison
+meta:
+  - name: description
+    content: This post explains our research on different reverse proxies.
+  - name: keywords
+    content: proxy, nginx, lighttpd, pound, hipache, strowger, comparison
 comments: true
 ---
 
@@ -15,15 +18,12 @@ has been packaged and made available as a trusted build on
 towards the larger goal of `docker run deis/deis`; a container that contains every
 component of the deis controller in one Docker image. One thing we overlooked was the
 proxy, so I had to come up with a solution that would meet Deis' demands. This post
-explains our research on different proxies and why we decided on choosing nginx as our
-default router.
+explains our research on different reverse proxies.
 
 We accidentally left out one component when containerizing all the things: a reverse
 proxy. After the release, we decided to start doing some research on the different
 proxies and to come up with a solution for our use case. Of all the proxies available, we
-decided to look at 6 different proxies. After some filtering, we set our eyes on 1
-proxy, containerized it, and then ran some more tests against it for your enjoyment (and
-ours). Here's the list of the proxies we looked at:
+decided to look at 6 different proxies. Here's the list of the proxies we looked at:
 
 - Nginx: a high performance, open source web application accelerator
 - Lighttpd: a secure, fast, compliant, and flexible web-server for high-performance environments
@@ -120,8 +120,8 @@ third party modules a lot easier than bundling it yourself.
 
 ## To be Continued...
 
-Our next blog post will look into a proof of concept that is containerized using Docker,
-dynamic configuration from [etcd][3], and advanced templating features from [confd][4].
+Our next blog post will look into a proof of concept that could potentially become Deis'
+new router component.
 
 [1]: http://sosedoff.com/2012/06/11/dynamic-nginx-upstreams-with-lua-and-redis.html
 [2]: http://www.kegel.com/c10k.html
