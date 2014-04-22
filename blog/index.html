@@ -33,12 +33,12 @@ meta:
 <div class="blog-nav">
   {% if paginator.previous_page %}
     {% if paginator.page == 2 %}
-    <a href="/blog/" class="prev">Newer</a>
+    <a href="{{ site.baseurl }}/blog/" class="prev">Newer</a>
     {% else %}
-    <a href="/blog/page{{ paginator.previous_page }}/" class="prev">Newer</a>
+    <a href="{{ site.baseurl }}/blog/page{{ paginator.previous_page }}/" class="prev">Newer</a>
     {% endif %}
   {% endif %}
   {% if paginator.next_page %}
-    <a href="/blog/page{{ paginator.next_page }}" class="next">Older</a>
+    <a href="{{ site.baseurl }}/blog/page{{ paginator.next_page }}" class="next">Older</a>
   {% endif %}
 </div>
