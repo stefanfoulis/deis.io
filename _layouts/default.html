@@ -71,7 +71,7 @@
                     </div>
                 </div>
             </div>
-            <div class="span9 hoop content">
+            <div class="{% if page.content-class %}{{ page.content-class }}{% else %}span9{% endif %} hoop content">
                 {{ content }}
             </div>
         </div> <!-- .row -->
