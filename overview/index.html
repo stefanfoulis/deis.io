@@ -12,29 +12,61 @@ meta:
 <div class="green overview content"><h1>What is Deis?</h1>
     <div class="row">
         <div class="span6">
-            <p>Deis (pronounced DAY-iss) is an open source PaaS that makes it easy to deploy and scale LXC containers and Chef nodes used to host applications, databases, middleware and other services. Deis leverages <a href="http://www.opscode.com/chef/" target="_blank">Chef</a>, <a href="http://docker.io/" target="_blank">Docker</a> and <a href="https://devcenter.heroku.com/articles/buildpacks" target="_blank">Heroku Buildpacks</a> to provide a private PaaS that is <a href="http://docs.deis.io/en/latest/gettingstarted/concepts/">lightweight and flexible</a>.
-            </div>
+            <p>
+            Deis (pronounced DAY-iss) is an open source PaaS that makes it easy to deploy, scale and manage applications and services. Deis builds upon <a href="http://docker.io/" target="_blank">Docker</a> and <a href="https://coreos.com/" target="_blank">CoreOS</a> to provide a lightweight PaaS with a <a href="https://www.heroku.com/" target="_blank">Heroku-inspired</a> workflow.
+            </p>
         </div>
-        <div style="height: 15px;"></div>
-        <div id="video"><script type="text/javascript" src="http://asciinema.org/a/5600.js" id="asciicast-5600" async></script></div>
-        <div class="row">
-            <div class="span6">
-                <h3>Supported Languages</h3>
-                <p>Deis comes with out-of-the-box support for <a href="http://www.ruby-lang.org/" target="_blank">Ruby</a>, <a href="http://python.org/" target="_blank">Python</a>, <a href="http://nodejs.org/" target="_blank">Node.js</a>, <a href="http://java.com" target="_blank">Java</a>, <a href="http://clojure.org" target="_blank">Clojure</a>, <a href="http://www.scala-lang.org/" target="_blank">Scala</a>, <a href="http://www.playframework.com/" target="_blank">Play</a>, <a href="http://www.php.net/" target="_blank">PHP</a>, <a href="http://perl.org" target="_blank">Perl</a>, <a href="http://www.dartlang.org/" target="_blank">Dart</a> and <a href="http://golang.org" target="_blank">Go</a>. However, Deis can deploy anything using Heroku Buildpacks, Docker images or Chef recipes.</p>
-                <h3>Supported Providers</h3>
-                <p>Deis can be deployed on any system including every public cloud, private cloud or bare metal.  Deis currently supports automated provisioning on <a href="http://aws.amazon.com/ec2/" target="_blank">EC2</a>, <a href="http://www.rackspace.com/cloud/" target="_blank">Rackspace</a> and <a href="https://www.digitalocean.com/" target="_blank">Digital Ocean</a>.</p>
-                <h1 style="margin-bottom: 7px !important;">Why Deis?</h1>
-                <h3>Deploy Anything</h3>
-                <p>Deploy a wide range of languages and frameworks with a simple &#8220;git push&#8221; using Heroku Buildpacks or Dockerfiles. Use custom Chef layers to deploy databases, middleware and other add-on services.</p>
-                <h3>Control Everything</h3>
-                <p>Choose your hosting provider configuration. Define a <a href="http://docs.deis.io/en/latest/gettingstarted/concepts">formation</a> with your own proxy and runtime layers. Retain full root access to every node. Manage your platform with a private Deis controller.</p>
-                <h3>Scale Effortlessly</h3>
-                <p>Scale nodes and containers with a single command. Node provisioning, container balancing and proxy reconfiguration are completely automated.</p>
-                <h3>100% Open Source</h3>
-                <p>Free, transparent and easily customized. Join the open-source PaaS and DevOps community by using Deis and complimentary projects like Docker, Chef and Heroku Buildpacks.</p>
-                <h1>Who is behind Deis?</h1>
-                <p><a href="http://opdemand.com/" target="_blank">OpDemand</a> is the creator and maintainer of the Deis project. OpDemand provides commercial support and professional services around Deis.</p>
-            </div>
+    </div>
+    <div style="height: 15px;"></div>
+    <div id="video">
+      <script type="text/javascript" src="https://asciinema.org/a/8905.js" id="asciicast-8905" async=""></script>
+    </div>
+    <div class="row">
+        <div class="span6">
+            <h3>Supported Applications</h3>
+            <p>
+            Deis can deploy any application or service that can run inside a Docker container.
+            In order to be scaled horizontally, applications must follow Heroku's <a href="http://12factor.net/">12-factor methodology</a>.
+            </p>
+
+            <h3>Supported Languages</h3>
+            <p>
+            Deis can deploy any language or framework using a Dockerfile.
+            If you don't have a Dockerfile, Deis includes Heroku buildpacks for <a href="http://www.ruby-lang.org/" target="_blank">Ruby</a>, <a href="http://python.org/" target="_blank">Python</a>, <a href="http://nodejs.org/" target="_blank">Node.js</a>, <a href="http://java.com" target="_blank">Java</a>, <a href="http://clojure.org" target="_blank">Clojure</a>, <a href="http://www.scala-lang.org/" target="_blank">Scala</a>, <a href="http://www.playframework.com/" target="_blank">Play</a>, <a href="http://www.php.net/" target="_blank">PHP</a>, <a href="http://perl.org" target="_blank">Perl</a>, <a href="http://www.dartlang.org/" target="_blank">Dart</a> and <a href="http://golang.org" target="_blank">Go</a>.
+            </p>
+
+            <h3>Supported Platforms</h3>
+            <p>Deis can be deployed on any system that supports CoreOS including your workstation, as well as most public clouds, private clouds and bare metal.
+            </p>
+
+            <h1 style="margin-bottom: 7px !important;">Why Deis?</h1>
+
+            <h3>Deploy Anything</h3>
+            <p>
+            Deploy any language or frameworks with a simple &#8220;git push&#8221;.
+            Use Deis to promote existing Docker images through a CI/CD pipeline.
+            </p>
+
+            <h3>Control Everything</h3>
+            <p>
+            Choose your hosting provider configuration.  Integrate Deis with the monitoring and logging tools of your choice.  Retain root access to everything.
+            </p>
+
+            <h3>Scale Effortlessly</h3>
+            <p>
+            Scale application containers up or down with a single command.   To scale capacity of the Deis platform, simply add or remove hosts from the cluster.
+            </p>
+
+            <h3>100% Open Source</h3>
+            <p>
+            Released under the Apache 2 license, Deis is free and easily customized.
+            </p>
+
+            <h1>Who is behind Deis?</h1>
+            <p>
+            <a href="http://opdemand.com/" target="_blank">OpDemand</a> is the creator and maintainer of the Deis project. OpDemand provides commercial support and professional services around Deis.
+            </p>
         </div>
+    </div>
     </div>
 </div>
