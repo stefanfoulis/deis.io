@@ -28,3 +28,6 @@ footer{display:none;width:201px}.testClass{padding:0;margin:0}h1,h2,h3,h4,h5,h6{
         padding-left:0 !important;
     }
 }
+
+/* disable page number text */
+.page_number {display: none;}

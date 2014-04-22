@@ -56,7 +56,7 @@
                         <div style="clear:both;"></div>
                     </ul>
 
-                    <div>
+                    <div class="footer">
                         <div class="social-menu ">
                             <a href="https://twitter.com/opendeis" target="_blank"><span class="twitter"></span></a>
                             <a href="http://freenode.net" target="_blank"><span class="irc"></span></a>
@@ -89,5 +89,36 @@
     ga('create', 'UA-42867143-1', 'deis.io');
     ga('send', 'pageview');
     </script>
+    <script>
+      //Mailchimp Styling
+       $(function() {
+        $('#mc_mv_EMAIL').attr('value', 'Email');
+
+        $('#mc_mv_EMAIL').focus(function() {
+          if($('#mc_mv_EMAIL').attr('value') == "Email") {
+            $('#mc_mv_EMAIL').attr('value', '');        
+          }
+        });
+
+        $('#mc_mv_EMAIL').blur(function() {
+          if($('#mc_mv_EMAIL').attr('value') == "") {
+            $('#mc_mv_EMAIL').attr('value', 'Email');        
+          }
+        });
+
+        $('.mc_var_label').html("");
+        
+        //Social Bar Styling
+        var pageHeight = $(document).height();
+        $('.nav-border').css('height', pageHeight);
+        var margin = pageHeight - 511 - 158;
+        if (pageHeight < 800){
+          margin = 270;
+          $('body').css('height', '930');
+          $('.nav-border').css('height', '930');
+        }
+        $('.footer').css({'margin-top': margin, 'display': 'block'});
+      });
+      </script>
 </body>
 </html>
