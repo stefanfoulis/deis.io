@@ -1,4 +1,4 @@
-footer{display:none;width:201px}
+.footer{display:none;width:201px}
 .testClass{padding:0;margin:0}
 h1,h2,h3,h4,h5,h6{font-family:"Helvetica Neue Light","HelveticaNeue-Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;font-weight:300}
 h1{display:inline-block;padding:50px 0 45px 0;margin-bottom:21px;font-size:36px}
@@ -8,6 +8,7 @@ h4{margin:50px 0 50px 0;font-size:28px;font-style:italic;line-height:normal;colo
 a{font-family:helvetica;font-size:16px;font-weight:300;text-decoration:underline;border:0!important}
 p{font-family:helvetica;font-size:16px;line-height:22px}
 img{border:0!important}
+body{zoom: 1;}
 .fork{float:right}
 .fork .forkImage{width:103px;height:58px;background:url(../img/fork.png)}
 .fork .forkImage:hover{background:url(../img/fork.png) 0 -58px}
@@ -43,11 +44,9 @@ a.get-deis-link:hover{color:#00aeff!important;text-decoration:none}
 .social-menu{height:34px;margin:0 0 28px 15px}
 .social-menu a{border:0}
 .social-menu a:hover{border:0}
-.social-menu a span{display:inline-block;float:left;width:34px;height:33px;margin-top:15px}
-.social-menu a span
-.twitter{margin-right:4px;background:url(../img/social.png) 0 0}
-.social-menu a span
-.twitter:hover{background:url(../img/social.png) 0 -33px}
+.social-menu a span{display:inline-block;float:left;width:34px;height:33px;}
+.social-menu a span.twitter{margin-right:4px;background:url(../img/social.png) 0 0}
+.social-menu a span.twitter:hover{background:url(../img/social.png) 0 -33px}
 .social-menu a span.irc{margin-right:4px;background:url(../img/social.png) -37px 0}
 .social-menu a span.irc:hover{background:url(../img/social.png) -37px -33px}
 .social-menu a span.github{margin-right:4px;background:url(../img/social.png) -74px 0}
@@ -58,8 +57,7 @@ a.get-deis-link:hover{color:#00aeff!important;text-decoration:none}
 .byline-menu a{font-size:12px;line-height:16px;color:#ccc;text-decoration:none;border:0}
 .byline-menu a:hover{color:#00aeff;text-decoration:none;border:0}
 .byline-menu span{display:inline-block;float:left;width:36px;height:33px}
-.byline-menu span
-.cloud-logo{margin-right:15px;background:url(../img/social.png) -143px 0}
+.byline-menu span.cloud-logo{margin-right:15px;background:url(../img/social.png) -143px 0}
 .byline-menu p{font-size:12px;line-height:16px;color:#ccc}
 .home p{line-height:25px;color:#ff135a}
 .home img.cover-image{padding-top:165px;padding-left:100px}
