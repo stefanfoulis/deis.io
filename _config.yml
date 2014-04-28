@@ -1,6 +1,5 @@
 name: Deis
 url: http://deis.io
-baseurl: /deis.io
 tagline: Your Paas. Your Rules.
 pygments: true
 gems:
