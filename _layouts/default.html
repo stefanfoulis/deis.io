@@ -43,15 +43,15 @@
                     <ul class="nav nav-list menu">
                         <li><a href="/"><img class="logo" src="{{ site.baseurl }}/assets/img/menu-logo.png" alt="deis logo"></a></li>
                         <li class="divider"></li>
-                        <li class="navitem overview{% if page.title == "Deis Overview" %} selected green{% endif %}"><a href="{{ site.baseurl }}/overview/">Overview</a></li>
+                        <li class="navitem overview{% if page.url contains '/overview/' %} selected green{% endif %}"><a href="{{ site.baseurl }}/overview/">Overview</a></li>
                         <li class="divider"></li>
-                        <li class="navitem get-deis{% if page.title == "Get Deis" %} selected blue{% endif %}"><a href="{{ site.baseurl }}/get-deis/">Get Deis</a></li>
+                        <li class="navitem get-deis{% if page.url contains '/get-deis/' %} selected blue{% endif %}"><a href="{{ site.baseurl }}/get-deis/">Get Deis</a></li>
                         <li class="divider"></li>
-                        <li class="navitem get-involved{% if page.title == "Get Involved with Deis" %} selected pink{% endif %}"><a href="{{ site.baseurl }}/get-involved/">Get Involved</a></li>
+                        <li class="navitem get-involved{% if page.url contains '/get-involved/' %} selected pink{% endif %}"><a href="{{ site.baseurl }}/get-involved/">Get Involved</a></li>
                         <li class="divider"></li>
                         <li class="navitem documentation"><a href="http://docs.deis.io/">Documentation</a></li>
                         <li class="divider"></li>
-                        <li class="navitem blog{% if page.title == "Deis Blog" %} selected blue{% endif %}"><a href="{{ site.baseurl }}/blog">Blog</a></li>
+                        <li class="navitem blog{% if page.url contains '/blog/' %} selected blue{% endif %}"><a href="{{ site.baseurl }}/blog">Blog</a></li>
                         <li class="divider"></li>
                         <div style="clear:both;"></div>
                     </ul>
