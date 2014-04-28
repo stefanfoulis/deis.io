@@ -12,6 +12,8 @@ excerpt: The Deis project is happy to announce our v0.7.0 release. This version 
 
 The Deis project is happy to announce our v0.7.0 release. This version improves quality and testing for our Chef recipes, allows a Deis admin to disable user registrations, and adds the `deis shortcuts` command. Deis also has new [guidelines][1] to help community members contribute.
 
+<!--more-->
+
 ## What is Deis?
 
 Deis is a Django/Celery API server, Python CLI and set of [Chef cookbooks][2] that combine to provide a Heroku-inspired application platform for public and private clouds. Your PaaS. Your Rules.

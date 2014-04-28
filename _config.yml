@@ -19,7 +19,7 @@ timezone: America/Denver
 permalink: /blog/:year/:month/:day/:title
 paginate: 5
 paginate_path: "blog/page:num"
-excerpt_separator: "\n"
+excerpt_separator: "<!--more-->"
 exclude: ['README.md', 'Gemfile', 'Gemfile.lock', '.ruby-version']
 authors:
   mboersma:

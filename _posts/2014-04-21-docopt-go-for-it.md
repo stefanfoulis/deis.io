@@ -7,7 +7,6 @@ meta:
     content: As of today the Deis team is helping maintain the docopt-go project on GitHub.
   - name: keywords
     content: deis, docopt, golang, docopt-go
-excerpt: Don't write parser code, a good help message already has all the necessary information in it.  That is the philosophy of docopt in a nutshell.  As of today the Deis team is helping maintain the docopt.go project on GitHub.
 ---
 
 ```go
