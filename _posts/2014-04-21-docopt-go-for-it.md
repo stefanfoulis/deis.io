@@ -1,6 +1,6 @@
 ---
 layout: post
-title: doctopt-go for it!
+title: docopt-go for it!
 author: mboersma
 meta:
   - name: description
