@@ -5,12 +5,8 @@
         $('#mc_submit_type').val('js');
 
         // Attach our form submitter action
-        $('#mc_signup_form').ajaxForm({
-            url: mailchimpSF.ajax_url,
-            type: 'POST',
-            dataType: 'text',
-            beforeSubmit: mc_beforeForm,
-            success: mc_success
+        $('#mc_signup_form').ajaxChimp({
+            url: 'http://deis.us2.list-manage.com/subscribe/post-json?u=2ad6b6ca7910248391eaa8751&id=9342c8c944'
         });
     });
 
