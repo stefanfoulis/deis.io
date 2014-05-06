@@ -16,7 +16,8 @@ redcarpet:
                 "superscript"
               ]
 timezone: America/Denver
-permalink: /blog/:year/:month/:day/:title
+#permalink: /blog/:year/:month/:day/:title
+permalink: /:title
 paginate: 5
 paginate_path: "blog/page:num"
 excerpt_separator: "<!--more-->"
