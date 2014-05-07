@@ -26,14 +26,22 @@ meta:
                 <div class="span6">
 {% highlight bash %}
 $ git clone https://github.com/opdemand/deis.git  # clone the repo
-$ contrib/ec2/provision-ec2-cluster.sh            # provision a cluster
-$ contrib/ec2/initialize-ec2-cluster.sh           # bootstrap the cluster
+$ cd deis && vagrant up                           # provision a cluster
+$ ssh-add ~/.vagrant.d/insecure_private_key       # allow SSH access
+$ export DOCKER_HOST=tcp://172.17.8.100:4243      # point docker at it
+$ export FLEETCTL_TUNNEL=172.17.8.100             # fleetctl too
+$ make pull && make run                           # bootstrap the cluster
 $ sudo pip install deis                           # install the CLI
-$ deis register http://my.controller              # register a user
+$ deis register http://local.deisapp.com:8000     # register a user
+$ deis keys:add                                   # add your SSH key
 {% endhighlight %}
                 </div>
                 <div class="span3">
-                    <p>Provision a private <a href="http://docs.deis.io/en/latest/components/controller/" target="_blank">Controller</a> &#8212; the brains of a Deis application platform.</p>
+                    <p>Provision a private <a href="http://docs.deis.io/en/latest/components/controller/" target="_blank">Controller</a> &#8212; the brains of a Deis application platform. Here we use
+                    <a href="http://docs.deis.io/en/latest/operations/provision-controller/#vagrant">Vagrant</a>,
+                    but Deis also runs on
+                    <a href="http://docs.deis.io/en/latest/operations/provision-controller/#rackspace">Rackspace</a> and
+                    <a href="http://docs.deis.io/en/latest/operations/provision-controller/#amazon-ec2">EC2</a>.</p>
                     <p>Use the Deis <a href="http://docs.deis.io/en/latest/gettingstarted/usage/" target="_blank">command-line client</a> to interact with the controller.</p>
                 </div>
             </div>
@@ -42,28 +50,48 @@ $ deis register http://my.controller              # register a user
             <div class="row">
                 <div class="span6">
 {% highlight bash %}
+$ deis clusters:create dev local.deisapp.com \    # create a cluster
+    --hosts=local.deisapp.com \
+    --auth=~/.vagrant.d/insecure_private_key
 $ deis create
-Creating application... done, created peachy-waxworks
+Creating application... done, created lambda-hawthorn
 Git remote deis added
-
 $ git push deis master
-Counting objects: 146, done.
-Delta compression using up to 8 threads.
-Compressing objects: 100% (122/122), done.
-Writing objects: 100% (146/146), 21.54 KiB, done.
-Total 146 (delta 84), reused 47 (delta 22)
-       Node.js app detected
------> Resolving engine versions
-       Using Node.js version: 0.10.15
-       Using npm version: 1.2.30
+Counting objects: 92, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (87/87), done.
+Writing objects: 100% (92/92), 19.29 KiB | 0 bytes/s, done.
+Total 92 (delta 40), reused 0 (delta 0)
+-----> Ruby app detected
+-----> Compiling Ruby/Rack
+-----> Using Ruby version: ruby-1.9.3
+-----> Installing dependencies using 1.5.2
+       Running: bundle install --without development:test
+       ...
+-----> Discovering process types
+       Procfile declares types -> web
+       Default process types for Ruby -> rake, console, web
+-----> Compiled slug size is 12M
+-----> Building Docker image
+Uploading context 11.81 MB
 ...
------> Compiled slug size: 4.7 MB
+Step 3 : ENTRYPOINT ["/runner/init"]
+ ---> Running in 94eb867135db
+ ---> f49031ecd6c1
+Successfully built f49031ecd6c1
+-----> Pushing image to private registry
+
        Launching... done, v2
 
------> peachy-waxworks deployed to Deis
-       http://peachy-waxworks.local.deisapp.com ...
+-----> lambda-hawthorn deployed to Deis
+       http://lambda-hawthorn.local.deisapp.com
 
-$ curl -s http://peachy-waxworks.local.deisapp.com
+       To learn more, use `deis help` or visit http://deis.io
+
+To ssh://git@local.deisapp.com:2222/lambda-hawthorn.git
+ * [new branch]      master -> master
+
+$ curl -s http://lambda-hawthorn.local.deisapp.com
 Powered by Deis!
 
 $ deis scale web=4
