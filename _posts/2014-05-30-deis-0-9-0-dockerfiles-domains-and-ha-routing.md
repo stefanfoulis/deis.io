@@ -94,7 +94,7 @@ issues, providing support to others, and working on various Deis branches:
 * @itsmeduncan - CoreOS feedback, FLEETCTL_TUNNEL fix, 3-node cluster discussion
 * @jacobwg - registration_enabled bug find
 * @jefff - NFS / OS X issue report
-* @johannesweurbach - toggle registration in etcd, configurable gzip settings
+* @johanneswuerbach - toggle registration in etcd, configurable gzip settings
 * @jperville - deploy / scale issue, caching discussion, fleet-check Makefile fix
 * @justicel - Ruby buildpack testing
 * @marceldegraf - `deis scale` 0.8.0 bug report
@@ -104,7 +104,7 @@ issues, providing support to others, and working on various Deis branches:
 * @possibilities - NFS / OS X issue report
 * @recipher - 3-node Vagrant testing, HA discussion
 * @rgarcia - testing, db migration suggestion, VPC instructions
-* @robparrot - deprecate NFS & update CoreOS PR
+* @robparrott - deprecate NFS & update CoreOS PR
 * @romansergey - registration_enabled bug find
 * @SEJeff - vulcand discussion
 * @shanejonas - Docker container template timeout fix
