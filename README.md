@@ -1,4 +1,4 @@
-# Deis.io Website
+# Deis.io Website - An Amazing Project
 
 This is the source code for our publicly viewable website, http://deis.io.
 
